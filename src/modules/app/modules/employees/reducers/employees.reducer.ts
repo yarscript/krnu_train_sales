@@ -2,11 +2,11 @@ import { createReducer, on } from '@ngrx/store';
 
 import {
   OrganisationApiActions, OrganisationCreatePageActions
-}                                            from '@/modules/app/modules/firms/actions'
-import { Organisation as OrganisationState } from "@/modules/app/modules/firms/interfaces/firm-state.interface";
+}                                            from '@/modules/app/modules/employees/actions'
+import { Organisation as OrganisationState } from "@/modules/app/modules/employees/interfaces/employee-state.interface";
 
 
-export const organisationFeatureKey = 'organisations';
+export const organisationFeatureKey = 'employees';
 
 export interface State
 {
@@ -20,8 +20,11 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
+  on(OrganisationApiActions.initSuccess, (state, { organisations }) => {
+    return { ...state, organisations }
+  }),
   on(OrganisationApiActions.createSuccess, (state, { organisation }) => {
-    return { ...state, organisations: [organisation] }
+    return { ...state, organisations: [ organisation ] }
   }),
 );
 

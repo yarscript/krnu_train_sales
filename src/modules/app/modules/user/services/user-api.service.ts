@@ -39,9 +39,16 @@ export class UserApiService
   }
 
   public init(auth): Observable<UserState> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'XDEBUG_SESSION_START': 'PHPSTORM',
+        'Authorization': auth?.token_type + ' ' + auth?.token
+      })
+    };
 
     const response = this.http.get<UserState>(
-      this.config.getConfig().url.api + '/me', this.httpOptions
+        this.config.getConfig().url.api + '/me', this.httpOptions
     );
 
     console.log('RESPONSE ORGS ====>> ', response);

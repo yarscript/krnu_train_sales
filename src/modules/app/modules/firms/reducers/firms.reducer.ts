@@ -20,8 +20,11 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
+  on(OrganisationApiActions.initSuccess, (state, { organisations }) => {
+    return { ...state, organisations }
+  }),
   on(OrganisationApiActions.createSuccess, (state, { organisation }) => {
-    return { ...state, organisations: [organisation] }
+    return { ...state, organisations: [ organisation ] }
   }),
 );
 

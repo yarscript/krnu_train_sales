@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store }             from '@ngrx/store';
 
-import * as fromOrganisations  from '@/modules/app/modules/organisations/reducers';
-import { OrganisationService } from "@/modules/app/modules/organisations/services/organisation.service";
+import * as fromOrganisations from '@/modules/app/modules/firms/reducers';
+import { FirmService }        from "@/modules/app/modules/firms/services/firm.service";
 
 
 
@@ -35,7 +35,7 @@ export class CreateProjectPageComponent implements OnInit
 
   constructor(
     private store: Store<fromOrganisations.State>,
-    private organisationService$: OrganisationService
+    private organisationService$: FirmService
   ) {}
 
   ngOnInit() {

@@ -58,11 +58,21 @@ import { map, mergeAll, take } from "rxjs/operators";
           <app-nav-item
             (navigate)="closeSidenav()"
             *ngIf="loggedIn$ | async"
-            routerLink="/organisations"
+            routerLink="/firms"
             icon="groups"
-            hint="Manage your organisations"
+            hint="Manage your firms"
           >
-            Organisations
+            Firms
+          </app-nav-item>
+
+          <app-nav-item
+            (navigate)="closeSidenav()"
+            *ngIf="loggedIn$ | async"
+            routerLink="/employees"
+            icon="groups"
+            hint="Manage your employees"
+          >
+            Employees
           </app-nav-item>
           <app-nav-item
             (navigate)="closeSidenav()"

@@ -5,8 +5,8 @@ import { Observable }        from "rxjs";
 import * as fromServicePlanList       from '@/modules/app/modules/service-plan/reducers'
 import { ServicePlan }                from "@/modules/app/modules/service-plan/interfaces/service-plan.interface";
 import { ServicePlanListPageActions } from "@/modules/app/modules/service-plan/actions";
-import { ServicePlanPageActions }     from '@/modules/app/modules/user/actions';
-import { Organisation }               from "@/modules/app/modules/organisations/interfaces/organisation-state.interface";
+import { ServicePlanPageActions } from '@/modules/app/modules/user/actions';
+import { Organisation }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 
 
 @Component({

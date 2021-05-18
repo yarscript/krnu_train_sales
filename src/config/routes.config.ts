@@ -11,7 +11,8 @@ const routesNames = {
   error404: '404',
   login: 'login',
   books: 'books',
-  organizations: 'organisations',
+  firms: 'firms',
+  employees: 'employees',
   projects: 'projects',
   user: 'user',
 
@@ -27,7 +28,8 @@ export const RoutesConfig: any = {
     error404: `/${ routesNames.error404 }`,
     login: `/${ routesNames.login }`,
     books: `/${ routesNames.books }`,
-    organizations: `/${ routesNames.organizations }`,
+    firms: `/${ routesNames.firms }`,
+    employees: `/${ routesNames.employees }`,
     projects: `/${ routesNames.projects }`,
     user: `/${ routesNames.user }`
     // heroes: {

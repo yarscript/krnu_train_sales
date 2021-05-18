@@ -1,17 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
-import { Organisation }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
+import { Organisation }           from "@/modules/app/modules/employees/interfaces/employee-state.interface";
 
 @Component({
-  selector: 'app-projects-form',
+  selector: 'app-organisation-form',
   template: `
     <mat-card fxFlexFill>
-      <mat-card-title>Projects form</mat-card-title>
+      <mat-card-title>Employee form</mat-card-title>
       <mat-card-content fxLayout="column" fxLayoutAlign="center start">
         <form [formGroup]="form" (ngSubmit)="submit()">
           <p>
             <mat-form-field appearance="outline">
-              <mat-label>Project Name</mat-label>
+              <mat-label>Employee Name</mat-label>
               <input
                 type="text"
                 matInput
@@ -24,9 +24,9 @@ import { Organisation }           from "@/modules/app/modules/firms/interfaces/f
 
           <mat-card-footer fxLayout="right">
 
-<!--            <p *ngIf="errorMessage" class="loginError">-->
-<!--              {{ errorMessage }}-->
-<!--            </p>-->
+            <p *ngIf="errorMessage" class="loginError">
+              {{ errorMessage }}
+            </p>
 
             <p class="loginButtons">
               <button type="submit" mat-raised-button color="primary">Create</button>
@@ -44,14 +44,14 @@ import { Organisation }           from "@/modules/app/modules/firms/interfaces/f
     `
   ],
 })
-export class ProjectsFormComponent implements OnInit
+export class EmployeeFormComponent implements OnInit
 {
-  // @Input()
-  // set pending(isPending: boolean) {
-  //   isPending ? this.form.disable() : this.form.enable();
-  // }
+  @Input()
+  set pending(isPending: boolean) {
+    isPending ? this.form.disable() : this.form.enable();
+  }
 
-  // @Input() errorMessage!: string | null;
+  @Input() errorMessage!: string | null;
 
   @Output() submitted = new EventEmitter<Organisation>();
 

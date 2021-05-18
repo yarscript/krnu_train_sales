@@ -2,8 +2,8 @@ import { createReducer, on } from '@ngrx/store';
 
 import {
   OrganisationApiActions, OrganisationCreatePageActions
-}                                            from '@/modules/app/modules/organisations/actions'
-import { Organisation as OrganisationState } from "@/modules/app/modules/organisations/interfaces/organisation-state.interface";
+}                                            from '@/modules/app/modules/firms/actions'
+import { Organisation as OrganisationState } from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 
 
 export const organisationFeatureKey = 'organisations';

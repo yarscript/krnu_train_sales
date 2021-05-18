@@ -25,7 +25,7 @@ export const environment = {
     /* LOCAL REST API CRUD WITH POSTGRESQL */
     api: true,
     url: 'http://time.tracker',
-    api_url: 'http://time.tracker/api/v1'
+    api_url: 'http://train-sales.local/api/v1'
   },
 };
 

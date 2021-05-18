@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Organisation }        from "@/modules/app/modules/organisations/interfaces/organisation-state.interface";
+import { Organisation }        from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 
 
 export const init = createAction('[Organisation/Api] Init');

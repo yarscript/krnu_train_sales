@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
-import { Organisation }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
-import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
+import { Organisation }           from "@/modules/app/modules/employees/interfaces/employee-state.interface";
+import * as fromOrganisations     from "@/modules/app/modules/employees/reducers";
 
 
 @Component({
-  selector: 'app-projects-list',
+  selector: 'app-organisation-list',
   template:
     `
       <mat-card>
@@ -34,7 +34,7 @@ import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
     `
   ],
 })
-export class ProjectsListComponent
+export class EmployeeListComponent
 {
   @Input() organisations: Organisation[];
 
