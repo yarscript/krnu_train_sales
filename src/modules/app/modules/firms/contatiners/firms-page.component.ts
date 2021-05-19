@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store }             from '@ngrx/store';
 
-import * as fromOrganisations from '@/modules/app/modules/firms/reducers';
+import * as fromFirmReducers from '@/modules/app/modules/firms/reducers';
 import { FirmService }        from "@/modules/app/modules/firms/services/firm.service";
 
-import { OrganisationApiActions } from '@/modules/app/modules/firms/actions'
+import { FirmApiActions } from '@/modules/app/modules/firms/actions'
 
 
 @Component({
@@ -23,7 +23,7 @@ import { OrganisationApiActions } from '@/modules/app/modules/firms/actions'
         <mat-tab-group>
           <mat-tab label="Active">
             <app-organisation-list
-              [organisations]="organisations$ | async"
+              [firms]="firms$ | async"
             ></app-organisation-list>
           </mat-tab>
           <mat-tab label="Archived">Content 2</mat-tab>
@@ -39,13 +39,13 @@ import { OrganisationApiActions } from '@/modules/app/modules/firms/actions'
 })
 export class FirmsPageComponent implements OnInit
 {
-  organisations$ = this.store.select(fromOrganisations.selectOrganisations)
+  firms$ = this.store.select(fromFirmReducers.selectFirms)
 
   constructor(
-    private store: Store<fromOrganisations.State>,
+    private store: Store<fromFirmReducers.State>,
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(OrganisationApiActions.init())
+    this.store.dispatch(FirmApiActions.init())
   }
 }

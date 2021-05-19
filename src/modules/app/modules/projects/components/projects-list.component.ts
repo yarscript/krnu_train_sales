@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
-import { Organisation }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
 
 
@@ -36,7 +35,7 @@ import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
 })
 export class ProjectsListComponent
 {
-  @Input() organisations: Organisation[];
+  @Input() organisations: any[];
 
   displayedColumns: string[] = [ 'position', 'name' ];
 

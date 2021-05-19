@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
-import { Organisation }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
+// import { Organisation }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 
 @Component({
   selector: 'app-projects-form',
@@ -53,7 +53,7 @@ export class ProjectsFormComponent implements OnInit
 
   // @Input() errorMessage!: string | null;
 
-  @Output() submitted = new EventEmitter<Organisation>();
+  // @Output() submitted = new EventEmitter<Organisation>();
 
   form: FormGroup = new FormGroup({
     'name': new FormControl('')
@@ -68,7 +68,7 @@ export class ProjectsFormComponent implements OnInit
     if (this.form.valid) {
       console.log('validated');
 
-      this.submitted.emit(this.form.value)
+      // this.submitted.emit(this.form.value)
     }
   }
 }

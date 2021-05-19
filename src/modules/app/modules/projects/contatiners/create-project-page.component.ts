@@ -31,7 +31,7 @@ import { FirmService }        from "@/modules/app/modules/firms/services/firm.se
 })
 export class CreateProjectPageComponent implements OnInit
 {
-  organisations$ = this.store.select(fromOrganisations.selectOrganisations)
+  // organisations$ = this.store.select(fromOrganisations.selectOrganisations)
 
   constructor(
     private store: Store<fromOrganisations.State>,

@@ -39,7 +39,7 @@ import { OrganisationApiActions } from '@/modules/app/modules/employees/actions'
 })
 export class EmployeesPageComponent implements OnInit
 {
-  organisations$ = this.store.select(fromOrganisations.selectOrganisations)
+  employees$ = this.store.select(fromOrganisations.selectOrganisations)
 
   constructor(
     private store: Store<fromOrganisations.State>,

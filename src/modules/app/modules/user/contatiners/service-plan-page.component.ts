@@ -6,7 +6,7 @@ import * as fromServicePlanList       from '@/modules/app/modules/service-plan/r
 import { ServicePlan }                from "@/modules/app/modules/service-plan/interfaces/service-plan.interface";
 import { ServicePlanListPageActions } from "@/modules/app/modules/service-plan/actions";
 import { ServicePlanPageActions } from '@/modules/app/modules/user/actions';
-import { Organisation }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
+// import { Organisation }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 
 
 @Component({
@@ -72,7 +72,7 @@ export class ServicePlanPageComponent implements OnInit
     this.selectedServicePlan$ = servicePlan;
   }
 
-  onSubmit(organisation: Organisation) {
-
-  }
+  // onSubmit(organisation: Organisation) {
+  //
+  // }
 }

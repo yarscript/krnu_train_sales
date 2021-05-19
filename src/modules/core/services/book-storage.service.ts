@@ -12,7 +12,7 @@ export function storageFactory() {
 }
 
 export const LOCAL_STORAGE_TOKEN = new InjectionToken(
-  '/modules-local-storage',
+  '/modules-local-storages',
   { factory: storageFactory }
 );
 

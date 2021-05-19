@@ -1,31 +1,31 @@
 import { createReducer, on } from '@ngrx/store';
 
 import {
-  OrganisationApiActions, OrganisationCreatePageActions
+  FirmApiActions, FirmCreatePageActions
 }                                            from '@/modules/app/modules/firms/actions'
-import { Organisation as OrganisationState } from "@/modules/app/modules/firms/interfaces/firm-state.interface";
+import { Firm } from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 
 
-export const organisationFeatureKey = 'organisations';
+export const FirmFeatureKey = 'firm';
 
 export interface State
 {
   // user: User | null;
-  organisations: OrganisationState[]
+  firms: Firm[]
 }
 
 export const initialState: State = {
-  organisations: []
+  firms: []
 };
 
 export const reducer = createReducer(
   initialState,
-  on(OrganisationApiActions.initSuccess, (state, { organisations }) => {
-    return { ...state, organisations }
+  on(FirmApiActions.initSuccess, (state, { firms }) => {
+    return { ...state, firms }
   }),
-  on(OrganisationApiActions.createSuccess, (state, { organisation }) => {
-    return { ...state, organisations: [ organisation ] }
+  on(FirmApiActions.createSuccess, (state, { firm }) => {
+    return { ...state, Firms: [ firm ] }
   }),
 );
 
-export const getOrganisations = (state: State) => state.organisations;
+export const getFirms = (state: State) => state.firms;

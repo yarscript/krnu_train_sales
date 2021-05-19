@@ -5,11 +5,11 @@ import { of, EMPTY }                                  from 'rxjs';
 import { catchError, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
 
 import {
-  OrganisationApiActions,
-  OrganisationActions,
-  OrganisationCreatePageActions
+  FirmApiActions,
+  FirmActions,
+  FirmCreatePageActions
 }                       from '@/modules/app/modules/firms/actions'
-import { Organisation } from "@/modules/app/modules/firms/interfaces/firm-state.interface";
+import { Firm } from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 import { FirmService }  from "@/modules/app/modules/firms/services/firm.service";
 import { LocalStorageService } from "@/modules/core/local-storage/local-storage.service";
 
@@ -28,35 +28,35 @@ export class FirmEffects
 
   init$ = createEffect(() => {
       return this.actions$.pipe(
-        ofType(OrganisationApiActions.init),
+        ofType(FirmApiActions.init),
         exhaustMap(() => {
           return this.organisationService$.init().pipe(
             map(
-              response => OrganisationApiActions.initSuccess({ organisations: response })
+              response => FirmApiActions.initSuccess({ firms: response })
             )
           )
         })
       )
     }
   );
-
-  create$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(OrganisationCreatePageActions.create),
-      map(action => action.organisation),
-      exhaustMap((organisation: Organisation) => {
-        return this.organisationService$.create(organisation).pipe(
-          map(response => {
-            this.router.navigate(['/firms']).then();
-            return OrganisationApiActions.createSuccess({ organisation: response.data });
-          }),
-          catchError(err => {
-            return of(OrganisationApiActions.createFailure(err));
-          })
-        )
-      })
-    )
-  });
+  //
+  // create$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(OrganisationCreatePageActions.create),
+  //     map(action => action.organisation),
+  //     exhaustMap((organisation: Organisation) => {
+  //       return this.organisationService$.create(organisation).pipe(
+  //         map(response => {
+  //           this.router.navigate(['/firms']).then();
+  //           return OrganisationApiActions.createSuccess({ organisation: response.data });
+  //         }),
+  //         catchError(err => {
+  //           return of(OrganisationApiActions.createFailure(err));
+  //         })
+  //       )
+  //     })
+  //   )
+  // });
 
   // createSuccess$ = createEffect(() => {
   //   return this.actions$.pipe(

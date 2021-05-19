@@ -53,7 +53,7 @@ export class EmployeeFormComponent implements OnInit
 
   @Input() errorMessage!: string | null;
 
-  @Output() submitted = new EventEmitter<Organisation>();
+  // @Output() submitted = new EventEmitter<Organisation>();
 
   form: FormGroup = new FormGroup({
     'name': new FormControl('')
@@ -68,7 +68,7 @@ export class EmployeeFormComponent implements OnInit
     if (this.form.valid) {
       console.log('validated');
 
-      this.submitted.emit(this.form.value)
+      // this.submitted.emit(this.form.value)
     }
   }
 }

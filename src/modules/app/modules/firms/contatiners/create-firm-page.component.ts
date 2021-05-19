@@ -2,9 +2,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store }                                   from '@ngrx/store';
 import { FormGroup }                               from "@angular/forms";
 
-import { Organisation }       from "@/modules/app/modules/firms/interfaces/firm-state.interface";
+import { Firm }       from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 import * as fromOrganisations from '@/modules/app/modules/firms/reducers';
-import { OrganisationCreatePageActions } from '@/modules/app/modules/firms/actions'
+import { FirmCreatePageActions } from '@/modules/app/modules/firms/actions'
 
 
 @Component({
@@ -41,7 +41,7 @@ export class CreateFirmPageComponent implements OnInit
 
   ngOnInit() {}
 
-  onSubmit(organisation: Organisation) {
-    this.store.dispatch(OrganisationCreatePageActions.create({ organisation }))
+  onSubmit(organisation: Firm) {
+    this.store.dispatch(FirmCreatePageActions.create({ organisation }))
   }
 }

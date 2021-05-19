@@ -4,44 +4,44 @@ import {
 
 import * as fromRoot          from '@/modules/app/reducers';
 import * as fromCreatePage    from '@/modules/app/modules/firms/reducers/create-page.reducer';
-import * as fromOrganisations from '@/modules/app/modules/firms/reducers/firms.reducer';
+import * as fromFirmReducers from '@/modules/app/modules/firms/reducers/firms.reducer';
 
 
-export const organisationFeatureKey = 'organisations';
+export const organisationFeatureKey = 'firms';
 
 
-export interface OrganisationsState
+export interface FirmState
 {
-  [fromOrganisations.organisationFeatureKey]: fromOrganisations.State;
+  [fromFirmReducers.FirmFeatureKey]: fromFirmReducers.State;
   [fromCreatePage.createPageFeatureKey]: fromCreatePage.State;
 }
 
 export interface State extends fromRoot.State
 {
-  [organisationFeatureKey]: OrganisationsState;
+  [organisationFeatureKey]: FirmState;
 }
 
-export function reducers(state: OrganisationsState | undefined, action: Action) {
+export function reducers(state: FirmState | undefined, action: Action) {
   return combineReducers({
     [fromCreatePage.createPageFeatureKey]: fromCreatePage.reducer,
-    [fromOrganisations.organisationFeatureKey]: fromOrganisations.reducer,
+    [fromFirmReducers.FirmFeatureKey]: fromFirmReducers.reducer,
   })(state, action);
 }
 
-export const selectOrganisationsState = createFeatureSelector<State, OrganisationsState>(
+export const selectFirmsState = createFeatureSelector<State, FirmState>(
   organisationFeatureKey
 );
 
-export const selectOrganisationEntitiesState = createSelector(
-  selectOrganisationsState, (state) => state.organisations
+export const selectFirmEntitiesState = createSelector(
+  selectFirmsState, (state) => state.firm
 );
-export const selectOrganisations = createSelector(
-  selectOrganisationEntitiesState, fromOrganisations.getOrganisations
+export const selectFirms = createSelector(
+  selectFirmEntitiesState, fromFirmReducers.getFirms
 );
 
 
 export const selectCreatePageState = createSelector(
-  selectOrganisationsState, (state) => state.createPage
+  selectFirmsState, (state) => state.createPage
 );
 export const selectCreatePageError = createSelector(
   selectCreatePageState, fromCreatePage.getError

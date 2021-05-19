@@ -4,7 +4,7 @@ import { Store }             from '@ngrx/store';
 import * as fromOrganisations from '@/modules/app/modules/firms/reducers';
 import { FirmService }        from "@/modules/app/modules/firms/services/firm.service";
 
-import { OrganisationApiActions } from '@/modules/app/modules/firms/actions'
+// import { OrganisationApiActions } from '@/modules/app/modules/firms/actions'
 
 
 @Component({
@@ -37,7 +37,7 @@ import { OrganisationApiActions } from '@/modules/app/modules/firms/actions'
 })
 export class ProjectsPageComponent implements OnInit
 {
-  organisations$ = this.store.select(fromOrganisations.selectOrganisations)
+  // organisations$ = this.store.select(fromOrganisations.selectOrganisations)
 
   constructor(
     private store: Store<fromOrganisations.State>,
@@ -45,6 +45,6 @@ export class ProjectsPageComponent implements OnInit
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(OrganisationApiActions.init())
+    // this.store.dispatch(OrganisationApiActions.init())
   }
 }

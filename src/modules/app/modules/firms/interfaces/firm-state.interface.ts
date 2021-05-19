@@ -1,6 +1,5 @@
-export interface Organisation
+export interface Firm
 {
   name: string,
   type: number,
-  organisation_uuid: string | undefined,
 }

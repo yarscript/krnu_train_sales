@@ -74,6 +74,46 @@ import { map, mergeAll, take } from "rxjs/operators";
           >
             Employees
           </app-nav-item>
+
+          <app-nav-item
+            (navigate)="closeSidenav()"
+            *ngIf="loggedIn$ | async"
+            routerLink="/deals"
+            icon="groups"
+            hint="Manage your deals"
+          >
+            Deals
+          </app-nav-item>
+
+          <app-nav-item
+            (navigate)="closeSidenav()"
+            *ngIf="loggedIn$ | async"
+            routerLink="/carriages"
+            icon="groups"
+            hint="Manage your deals"
+          >
+            Carriages
+          </app-nav-item>
+
+          <app-nav-item
+            (navigate)="closeSidenav()"
+            *ngIf="loggedIn$ | async"
+            routerLink="/documents"
+            icon="groups"
+            hint="Manage your deals"
+          >
+            Documents
+          </app-nav-item>
+
+          <app-nav-item
+            (navigate)="closeSidenav()"
+            *ngIf="loggedIn$ | async"
+            routerLink="/storages"
+            icon="groups"
+            hint="Manage your deals"
+          >
+            Storages
+          </app-nav-item>
           <app-nav-item
             (navigate)="closeSidenav()"
             *ngIf="loggedIn$ | async"

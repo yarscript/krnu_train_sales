@@ -1,25 +1,22 @@
 import { createAction, props } from '@ngrx/store';
-import { Organisation }        from "@/modules/app/modules/firms/interfaces/firm-state.interface";
+import { Firm }        from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 
 
-export const init = createAction('[Organisation/Api] Init');
+export const init = createAction('[Firm/Api] Init');
 
 export const initSuccess = createAction(
-  '[Organisation/Api] InitSuccess', props<{ organisations: Organisation[] }>()
+  '[Firm/Api] InitSuccess', props<{ firms: Firm[] }>()
 );
 
 export const initFailure = createAction(
-  '[Organisation/Api] InitFailure', props<{ err: any }>()
-)
+  '[Firm/Api] InitFailure', props<{ err: any }>()
+);
 
 export const createSuccess = createAction(
-  '[Organisation/Api] Create Success', props<{ organisation: Organisation }>()
+  '[Firm/Api] Create Success', props<{ firm: Firm }>()
 );
 
 export const createFailure = createAction(
-  '[Organisation/Api] Create Failure', props<{ err: any }>()
+  '[Firm/Api] Create Failure', props<{ err: any }>()
 );
 
-// export const d = createAction(
-//   '[]'
-// );

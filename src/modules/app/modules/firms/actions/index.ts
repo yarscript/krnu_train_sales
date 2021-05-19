@@ -1,5 +1,5 @@
-import * as OrganisationActions           from './firm.actions';
-import * as OrganisationApiActions        from './firm-api.actions';
-import * as OrganisationCreatePageActions from './create-page.actions';
+import * as FirmActions           from './firm.actions';
+import * as FirmApiActions        from './firm-api.actions';
+import * as FirmCreatePageActions from './create-page.actions';
 
-export { OrganisationActions, OrganisationApiActions, OrganisationCreatePageActions }
+export { FirmActions, FirmApiActions, FirmCreatePageActions }

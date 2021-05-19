@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders }    from '@angular/common/http';
 
 import { LocalStorageService }                   from "@/modules/core/local-storage/local-storage.service";
 import {
-  Organisation,
+  Firm,
 }                                                from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 import { ConfigService as RequestConfigService } from '@/modules/http/http.module';
 
@@ -37,8 +37,8 @@ export class FirmService
     }
   }
 
-  init(): Observable<Organisation[]> {
-    const response = this.http.get<Organisation[]>(
+  init(): Observable<Firm[]> {
+    const response = this.http.get<Firm[]>(
       this.config.getConfig().url.api + '/organisation', this.httpOptions
     );
 
@@ -47,8 +47,8 @@ export class FirmService
     return response;
   }
 
-  create({ name }: Organisation): Observable<any> {
-    const response = this.http.post<Organisation>(
+  create({ name }: Firm): Observable<any> {
+    const response = this.http.post<Firm>(
       this.config.getConfig().url.api + '/organisation/create', { name }, this.httpOptions
     );
 

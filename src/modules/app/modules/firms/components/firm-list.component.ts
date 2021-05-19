@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
-import { Organisation }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
+import { Firm }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
 
 
@@ -19,9 +19,9 @@ import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
           </thead>
 
           <tbody>
-          <tr *ngFor="let organisation of organisations; index as i">
+          <tr *ngFor="let firm of firms; index as i">
             <th scope="row">{{ i + 1 }}</th>
-            <td>{{ organisation.name }}</td>
+            <td>{{ firm.name }}</td>
           </tr>
           </tbody>
         </table>
@@ -36,7 +36,7 @@ import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
 })
 export class FirmListComponent
 {
-  @Input() organisations: Organisation[];
+  @Input() firms: Firm[];
 
   displayedColumns: string[] = [ 'position', 'name' ];
 

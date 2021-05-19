@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
-import { Organisation }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
+import { Firm }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 
 @Component({
   selector: 'app-organisation-form',
@@ -53,7 +53,7 @@ export class FirmFormComponent implements OnInit
 
   @Input() errorMessage!: string | null;
 
-  @Output() submitted = new EventEmitter<Organisation>();
+  @Output() submitted = new EventEmitter<Firm>();
 
   form: FormGroup = new FormGroup({
     'name': new FormControl('')
