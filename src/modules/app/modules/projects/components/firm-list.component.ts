@@ -33,7 +33,7 @@ import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
     `
   ],
 })
-export class ProjectsListComponent
+export class FirmListComponent
 {
   @Input() organisations: any[];
 

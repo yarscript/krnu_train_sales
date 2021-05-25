@@ -19,7 +19,7 @@ import * as fromAuthEffects from '@/modules/auth/effects'
 })
 export class FirmService
 {
-  protected httpOptions: Object
+  protected httpHeaders: Object
 
   constructor(
     protected http: HttpClient,
@@ -28,7 +28,7 @@ export class FirmService
   ) {
     let auth = this.localStorage.getItem(fromAuthEffects.AUTH_KEY);
 
-    this.httpOptions = {
+    this.httpHeaders = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'XDEBUG_SESSION_START': 'PHPSTORM',
@@ -36,10 +36,10 @@ export class FirmService
       })
     }
   }
-
+  // [Firm/Api] Init
   init(): Observable<Firm[]> {
     const response = this.http.get<Firm[]>(
-      this.config.getConfig().url.api + '/organisation', this.httpOptions
+      this.config.getConfig().url.api + '/firm', this.httpHeaders
     );
 
     console.log('ORG INIT RESPONSE', response)
@@ -47,12 +47,12 @@ export class FirmService
     return response;
   }
 
-  create({ name }: Firm): Observable<any> {
+  create(firmData : Firm): Observable<any> {
     const response = this.http.post<Firm>(
-      this.config.getConfig().url.api + '/organisation/create', { name }, this.httpOptions
+      this.config.getConfig().url.api + '/firm/create',  firmData, this.httpHeaders
     );
 
-    console.log('RESPONSE ORGS ====>> ', response);
+    console.log('FIRM DATA ====>> ', firmData);
 
     return response;
   }

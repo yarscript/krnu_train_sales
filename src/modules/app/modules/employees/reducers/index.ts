@@ -4,44 +4,44 @@ import {
 
 import * as fromRoot          from '@/modules/app/reducers';
 import * as fromCreatePage    from '@/modules/app/modules/employees/reducers/create-page.reducer';
-import * as fromOrganisations from '@/modules/app/modules/employees/reducers/employees.reducer';
+import * as fromEmployees from '@/modules/app/modules/employees/reducers/employees.reducer';
 
 
-export const organisationFeatureKey = 'employees';
+export const employeeFeatureKey = 'employees';
 
 
-export interface OrganisationsState
+export interface EmployeesState
 {
-  [fromOrganisations.organisationFeatureKey]: fromOrganisations.State;
+  [fromEmployees.employeeFeatureKey]: fromEmployees.State;
   [fromCreatePage.createPageFeatureKey]: fromCreatePage.State;
 }
 
 export interface State extends fromRoot.State
 {
-  [organisationFeatureKey]: OrganisationsState;
+  [employeeFeatureKey]: EmployeesState;
 }
 
-export function reducers(state: OrganisationsState | undefined, action: Action) {
+export function reducers(state: EmployeesState | undefined, action: Action) {
   return combineReducers({
     [fromCreatePage.createPageFeatureKey]: fromCreatePage.reducer,
-    [fromOrganisations.organisationFeatureKey]: fromOrganisations.reducer,
+    [fromEmployees.employeeFeatureKey]: fromEmployees.reducer,
   })(state, action);
 }
 
-export const selectOrganisationsState = createFeatureSelector<State, OrganisationsState>(
-  organisationFeatureKey
+export const selectEmployeesState = createFeatureSelector<State, EmployeesState>(
+  employeeFeatureKey
 );
 
-export const selectOrganisationEntitiesState = createSelector(
-  selectOrganisationsState, (state) => state.employees
+export const selectOEmployeeEntitiesState = createSelector(
+  selectEmployeesState, (state) => state.employees
 );
-export const selectOrganisations = createSelector(
-  selectOrganisationEntitiesState, fromOrganisations.getOrganisations
+export const selectEmployees = createSelector(
+  selectOEmployeeEntitiesState, fromEmployees.getEmployees
 );
 
 
 export const selectCreatePageState = createSelector(
-  selectOrganisationsState, (state) => state.createPage
+  selectEmployeesState, (state) => state.createPage
 );
 export const selectCreatePageError = createSelector(
   selectCreatePageState, fromCreatePage.getError

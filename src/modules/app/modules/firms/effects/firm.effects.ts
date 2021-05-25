@@ -1,8 +1,8 @@
 import { Injectable }                                 from '@angular/core';
 import { Router }                                     from '@angular/router';
 import { Actions, ofType, createEffect, Effect }      from '@ngrx/effects';
-import { of, EMPTY }                                  from 'rxjs';
-import { catchError, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
+import { of, EMPTY }                                             from 'rxjs';
+import { catchError, exhaustMap, map, mergeMap, switchAll, tap } from 'rxjs/operators';
 
 import {
   FirmApiActions,
@@ -22,7 +22,7 @@ export class FirmEffects
   constructor(
     private router: Router,
     private actions$: Actions,
-    private organisationService$: FirmService,
+    private firmService$: FirmService,
     private localStorageService$: LocalStorageService,
   ) {}
 
@@ -30,33 +30,31 @@ export class FirmEffects
       return this.actions$.pipe(
         ofType(FirmApiActions.init),
         exhaustMap(() => {
-          return this.organisationService$.init().pipe(
-            map(
-              response => FirmApiActions.initSuccess({ firms: response })
-            )
+          return this.firmService$.init().pipe(
+            map(response => FirmApiActions.initSuccess({ firms: response }))
           )
         })
       )
     }
   );
-  //
-  // create$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(OrganisationCreatePageActions.create),
-  //     map(action => action.organisation),
-  //     exhaustMap((organisation: Organisation) => {
-  //       return this.organisationService$.create(organisation).pipe(
-  //         map(response => {
-  //           this.router.navigate(['/firms']).then();
-  //           return OrganisationApiActions.createSuccess({ organisation: response.data });
-  //         }),
-  //         catchError(err => {
-  //           return of(OrganisationApiActions.createFailure(err));
-  //         })
-  //       )
-  //     })
-  //   )
-  // });
+
+  create$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FirmCreatePageActions.create),
+      map(action => action.firm),
+      exhaustMap((firm: Firm) => {
+        return this.firmService$.create(firm).pipe(
+          map(response => {
+            this.router.navigate(['/firms']).then();
+            return FirmApiActions.createSuccess({ firm: response.data });
+          }),
+          catchError(err => {
+            return of(FirmApiActions.createFailure(err));
+          })
+        )
+      })
+    )
+  });
 
   // createSuccess$ = createEffect(() => {
   //   return this.actions$.pipe(

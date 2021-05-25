@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
 import {
-  OrganisationApiActions, OrganisationCreatePageActions
+  EmployeeApiActions, EmployeeCreatePageActions
 } from '@/modules/app/modules/employees/actions'
 
 
@@ -20,13 +20,13 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(OrganisationCreatePageActions.create, (state) => ({
+  on(EmployeeCreatePageActions.create, (state) => ({
     ...state, error: null, pending: true
   })),
-  on(OrganisationApiActions.createSuccess, (state) => ({
+  on(EmployeeApiActions.createSuccess, (state) => ({
     ...state, error: null, pending: false
   })),
-  on(OrganisationApiActions.createFailure, (state, { err }) => ({
+  on(EmployeeApiActions.createFailure, (state, { err }) => ({
     ...state, error: err, pending: false
   }))
 );

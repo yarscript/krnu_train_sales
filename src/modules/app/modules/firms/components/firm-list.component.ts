@@ -5,7 +5,7 @@ import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
 
 
 @Component({
-  selector: 'app-organisation-list',
+  selector: 'app-firm-list',
   template:
     `
       <mat-card>
@@ -15,6 +15,8 @@ import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
           <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Type</th>
           </tr>
           </thead>
 
@@ -22,6 +24,8 @@ import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
           <tr *ngFor="let firm of firms; index as i">
             <th scope="row">{{ i + 1 }}</th>
             <td>{{ firm.name }}</td>
+            <td>{{ firm.address }}</td>
+            <td>{{ firm.type_id }}</td>
           </tr>
           </tbody>
         </table>

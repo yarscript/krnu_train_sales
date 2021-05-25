@@ -44,7 +44,7 @@ import { FormGroup, FormControl } from "@angular/forms";
     `
   ],
 })
-export class ProjectsFormComponent implements OnInit
+export class FirmFormComponent implements OnInit
 {
   // @Input()
   // set pending(isPending: boolean) {

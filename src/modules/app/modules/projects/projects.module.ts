@@ -14,8 +14,8 @@ export const COMPONENTS = [
   fromPages.ProjectsPageComponent,
   fromPages.CreateProjectPageComponent,
 
-  fromComponents.ProjectsFormComponent,
-  fromComponents.ProjectsListComponent
+  fromComponents.FirmFormComponent,
+  fromComponents.FirmListComponent
 ];
 
 

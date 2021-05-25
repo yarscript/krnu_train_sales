@@ -4,11 +4,12 @@ import { HttpClient, HttpHeaders }    from '@angular/common/http';
 
 import { LocalStorageService }                   from "@/modules/core/local-storage/local-storage.service";
 import {
-  Organisation,
+  EmployeeStateInterface,
 }                                                from "@/modules/app/modules/employees/interfaces/employee-state.interface";
 import { ConfigService as RequestConfigService } from '@/modules/http/http.module';
 
-import * as fromAuthEffects from '@/modules/auth/effects'
+import * as fromAuthEffects  from '@/modules/auth/effects'
+import { ResponseInterface } from "@/modules/http/request/interfaces/response.interface";
 
 
 // TODO['removeDebug'] = 'remove debug header'
@@ -37,9 +38,9 @@ export class EmployeesService
     }
   }
 
-  init(): Observable<Organisation[]> {
-    const response = this.http.get<Organisation[]>(
-      this.config.getConfig().url.api + '/organisation', this.httpOptions
+  init(): Observable<ResponseInterface> {
+    const response = this.http.get<ResponseInterface>(
+      this.config.getConfig().url.api + '/employee', this.httpOptions
     );
 
     console.log('ORG INIT RESPONSE', response)
@@ -47,12 +48,12 @@ export class EmployeesService
     return response;
   }
 
-  create({ name }: Organisation): Observable<any> {
-    const response = this.http.post<Organisation>(
-      this.config.getConfig().url.api + '/organisation/create', { name }, this.httpOptions
+  create(employee: EmployeeStateInterface): Observable<any> {
+    const response = this.http.post<EmployeeStateInterface>(
+      this.config.getConfig().url.api + '/employee/create', employee, this.httpOptions
     );
 
-    console.log('RESPONSE ORGS ====>> ', response);
+    console.log('Employee request data ====>> ', employee);
 
     return response;
   }

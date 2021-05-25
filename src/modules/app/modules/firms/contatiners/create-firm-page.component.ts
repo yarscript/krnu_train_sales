@@ -3,12 +3,12 @@ import { Store }                                   from '@ngrx/store';
 import { FormGroup }                               from "@angular/forms";
 
 import { Firm }       from "@/modules/app/modules/firms/interfaces/firm-state.interface";
-import * as fromOrganisations from '@/modules/app/modules/firms/reducers';
+import * as fromFirmReducers from '@/modules/app/modules/firms/reducers';
 import { FirmCreatePageActions } from '@/modules/app/modules/firms/actions'
 
 
 @Component({
-  selector: 'app-create-organisation-page',
+  selector: 'app-create-firm-page',
   template: `
     <mat-toolbar>
       <h3>Create Firm</h3>
@@ -16,11 +16,11 @@ import { FirmCreatePageActions } from '@/modules/app/modules/firms/actions'
     <mat-grid-list cols="8" rowHeight="400">
       <mat-grid-tile colspan="1"></mat-grid-tile>
       <mat-grid-tile colspan="6">
-        <app-organisation-form
+        <app-firm-form
           (submitted)="onSubmit($event)"
           [pending]="$pending | async"
           [errorMessage]="$error | async"
-        ></app-organisation-form>
+        ></app-firm-form>
       </mat-grid-tile>
       <mat-grid-tile colspan="1"></mat-grid-tile>
     </mat-grid-list>
@@ -34,14 +34,15 @@ import { FirmCreatePageActions } from '@/modules/app/modules/firms/actions'
 })
 export class CreateFirmPageComponent implements OnInit
 {
-  $pending = this.store.select(fromOrganisations.selectCreatePagePending);
-  $error = this.store.select(fromOrganisations.selectCreatePageError)
+  $pending = this.store.select(fromFirmReducers.selectCreatePagePending);
 
-  constructor(private store: Store<fromOrganisations.State>) {}
+  $error = this.store.select(fromFirmReducers.selectCreatePageError)
+
+  constructor(private store: Store<fromFirmReducers.State>) {}
 
   ngOnInit() {}
 
-  onSubmit(organisation: Firm) {
-    this.store.dispatch(FirmCreatePageActions.create({ organisation }))
+  onSubmit(firm: Firm) {
+    this.store.dispatch(FirmCreatePageActions.create({ firm }))
   }
 }

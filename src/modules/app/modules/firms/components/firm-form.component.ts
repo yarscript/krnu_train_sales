@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
-import { Firm }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
+
+import { Firm as FirmStateInterface }           from "@/modules/app/modules/firms/interfaces/firm-state.interface";
 
 @Component({
-  selector: 'app-organisation-form',
+  selector: 'app-firm-form',
   template: `
     <mat-card fxFlexFill>
       <mat-card-title>Firms form</mat-card-title>
@@ -11,7 +12,8 @@ import { Firm }           from "@/modules/app/modules/firms/interfaces/firm-stat
         <form [formGroup]="form" (ngSubmit)="submit()">
           <p>
             <mat-form-field appearance="outline">
-              <mat-label>Firm Name</mat-label>
+              <mat-label>Firm name</mat-label>
+              
               <input
                 type="text"
                 matInput
@@ -20,14 +22,38 @@ import { Firm }           from "@/modules/app/modules/firms/interfaces/firm-stat
               />
             </mat-form-field>
           </p>
-
-
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Firm address</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="address"
+              />
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Firm type</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="type_id"
+              />
+            </mat-form-field>
+          </p>
+          
           <mat-card-footer fxLayout="right">
 
             <p *ngIf="errorMessage" class="loginError">
               {{ errorMessage }}
             </p>
 
+<!--            Submit-->
             <p class="loginButtons">
               <button type="submit" mat-raised-button color="primary">Create</button>
             </p>
@@ -53,10 +79,12 @@ export class FirmFormComponent implements OnInit
 
   @Input() errorMessage!: string | null;
 
-  @Output() submitted = new EventEmitter<Firm>();
+  @Output() submitted = new EventEmitter<FirmStateInterface>();
 
   form: FormGroup = new FormGroup({
-    'name': new FormControl('')
+    'name': new FormControl(''),
+    'address': new FormControl(''),
+    'type_id': new FormControl('')
   });
 
   constructor() {}
@@ -66,7 +94,7 @@ export class FirmFormComponent implements OnInit
   submit() {
     console.log('submitted');
     if (this.form.valid) {
-      console.log('validated');
+      console.log('validated and sending', this.form.value);
 
       this.submitted.emit(this.form.value)
     }

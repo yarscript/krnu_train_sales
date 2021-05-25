@@ -31,10 +31,10 @@ export const COMPONENTS = [
     ReactiveFormsModule,
 
     StoreModule.forFeature({
-      name: fromEmployeeReducers.organisationFeatureKey,
+      name: fromEmployeeReducers.employeeFeatureKey,
       reducer: fromEmployeeReducers.reducers,
     }),
-    EffectsModule.forFeature([ EmployeesModule ])
+    EffectsModule.forFeature([ EmployeeEffects ])
   ]
 })
 export class EmployeesModule

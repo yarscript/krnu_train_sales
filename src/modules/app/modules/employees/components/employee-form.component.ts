@@ -1,26 +1,90 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
-import { Organisation }           from "@/modules/app/modules/employees/interfaces/employee-state.interface";
+
+import { EmployeeStateInterface }           from "@/modules/app/modules/employees/interfaces/employee-state.interface";
 
 @Component({
-  selector: 'app-organisation-form',
+  selector: 'app-employee-form',
   template: `
     <mat-card fxFlexFill>
       <mat-card-title>Employee form</mat-card-title>
       <mat-card-content fxLayout="column" fxLayoutAlign="center start">
         <form [formGroup]="form" (ngSubmit)="submit()">
-          <p>
             <mat-form-field appearance="outline">
-              <mat-label>Employee Name</mat-label>
+              <mat-label>Employee first name</mat-label>
+              
               <input
                 type="text"
                 matInput
-                placeholder="Ex. pat@example.com"
-                formControlName="name"
+                placeholder=""
+                formControlName="first_name"
+              />
+            </mat-form-field>
+          
+            <mat-form-field appearance="outline">
+              <mat-label>Employee last name</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="last_name"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Employee position_id</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="position_id"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Employee city</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="city"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Employee address</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="address"
+              />
+            </mat-form-field>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Employee postal code</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="postal_code"
               />
             </mat-form-field>
           </p>
-
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Employee firm id</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="firm_id"
+              />
+            </mat-form-field>
+          </p>
 
           <mat-card-footer fxLayout="right">
 
@@ -53,10 +117,17 @@ export class EmployeeFormComponent implements OnInit
 
   @Input() errorMessage!: string | null;
 
-  // @Output() submitted = new EventEmitter<Organisation>();
+  @Output() submitted = new EventEmitter<EmployeeStateInterface>();
 
   form: FormGroup = new FormGroup({
-    'name': new FormControl('')
+    'first_name': new FormControl(''),
+    'last_name': new FormControl(),
+    'position_id': new FormControl(),
+    'city': new FormControl(),
+    'address': new FormControl(),
+    'postal_code': new FormControl(),
+    'firm_id': new FormControl(),
+
   });
 
   constructor() {}
@@ -68,7 +139,7 @@ export class EmployeeFormComponent implements OnInit
     if (this.form.valid) {
       console.log('validated');
 
-      // this.submitted.emit(this.form.value)
+      this.submitted.emit(this.form.value)
     }
   }
 }

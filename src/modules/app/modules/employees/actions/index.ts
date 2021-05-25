@@ -1,5 +1,5 @@
-import * as OrganisationActions           from './employee.actions';
-import * as OrganisationApiActions        from './employee-api.actions';
-import * as OrganisationCreatePageActions from './create-page.actions';
+import * as EmployeeActions           from './employee.actions';
+import * as EmployeeApiActions        from './employee-api.actions';
+import * as EmployeeCreatePageActions from './create-page.actions';
 
-export { OrganisationActions, OrganisationApiActions, OrganisationCreatePageActions }
+export { EmployeeActions, EmployeeApiActions, EmployeeCreatePageActions }

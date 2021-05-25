@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
-import { Organisation }           from "@/modules/app/modules/employees/interfaces/employee-state.interface";
-import * as fromOrganisations     from "@/modules/app/modules/employees/reducers";
+
+import { EmployeeStateInterface }           from "@/modules/app/modules/employees/interfaces/employee-state.interface";
+import * as fromEmployeeReducer     from "@/modules/app/modules/employees/reducers";
 
 
 @Component({
-  selector: 'app-organisation-list',
+  selector: 'app-employee-list',
   template:
     `
       <mat-card>
@@ -19,9 +20,9 @@ import * as fromOrganisations     from "@/modules/app/modules/employees/reducers
           </thead>
 
           <tbody>
-          <tr *ngFor="let organisation of organisations; index as i">
+          <tr *ngFor="let employee of employees; index as i">
             <th scope="row">{{ i + 1 }}</th>
-            <td>{{ organisation.name }}</td>
+            <td>{{ employee.first_name + employee.last_name }}</td>
           </tr>
           </tbody>
         </table>
@@ -36,7 +37,7 @@ import * as fromOrganisations     from "@/modules/app/modules/employees/reducers
 })
 export class EmployeeListComponent
 {
-  @Input() organisations: Organisation[];
+  @Input() employees: EmployeeStateInterface[];
 
   displayedColumns: string[] = [ 'position', 'name' ];
 

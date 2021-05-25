@@ -1,31 +1,31 @@
 import { createReducer, on } from '@ngrx/store';
 
 import {
-  OrganisationApiActions, OrganisationCreatePageActions
+  EmployeeCreatePageActions, EmployeeApiActions
 }                                            from '@/modules/app/modules/employees/actions'
-import { Organisation as OrganisationState } from "@/modules/app/modules/employees/interfaces/employee-state.interface";
+import { EmployeeStateInterface } from "@/modules/app/modules/employees/interfaces/employee-state.interface";
 
 
-export const organisationFeatureKey = 'employees';
+export const employeeFeatureKey = 'employees';
 
 export interface State
 {
   // user: User | null;
-  organisations: OrganisationState[]
+  employees: EmployeeStateInterface[]
 }
 
 export const initialState: State = {
-  organisations: []
+  employees: []
 };
 
 export const reducer = createReducer(
   initialState,
-  on(OrganisationApiActions.initSuccess, (state, { organisations }) => {
-    return { ...state, organisations }
+  on(EmployeeApiActions.initSuccess, (state, { employees }) => {
+    return { ...state, employees }
   }),
-  on(OrganisationApiActions.createSuccess, (state, { organisation }) => {
-    return { ...state, organisations: [ organisation ] }
+  on(EmployeeApiActions.createSuccess, (state, { employee }) => {
+    return { ...state, employees: [ employee ] }
   }),
 );
 
-export const getOrganisations = (state: State) => state.organisations;
+export const getEmployees = (state: State) => state.employees;

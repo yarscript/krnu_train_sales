@@ -8,7 +8,7 @@ import { FirmApiActions } from '@/modules/app/modules/firms/actions'
 
 
 @Component({
-  selector: 'app-organisations-page',
+  selector: 'app-firms-page',
   template: `
     <mat-toolbar fxLayout="row">
       <h3>Firms</h3>
@@ -22,9 +22,9 @@ import { FirmApiActions } from '@/modules/app/modules/firms/actions'
     </mat-toolbar>
         <mat-tab-group>
           <mat-tab label="Active">
-            <app-organisation-list
+            <app-firm-list
               [firms]="firms$ | async"
-            ></app-organisation-list>
+            ></app-firm-list>
           </mat-tab>
           <mat-tab label="Archived">Content 2</mat-tab>
           <mat-tab label="Content3">Content 3</mat-tab>

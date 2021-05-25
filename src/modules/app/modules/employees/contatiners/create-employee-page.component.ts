@@ -2,9 +2,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store }                                   from '@ngrx/store';
 import { FormGroup }                               from "@angular/forms";
 
-import { Organisation }       from "@/modules/app/modules/employees/interfaces/employee-state.interface";
-import * as fromOrganisations from '@/modules/app/modules/employees/reducers';
-import { OrganisationCreatePageActions } from '@/modules/app/modules/employees/actions'
+import { EmployeeStateInterface }       from "@/modules/app/modules/employees/interfaces/employee-state.interface";
+import * as fromEmployeeReducer from '@/modules/app/modules/employees/reducers';
+import { EmployeeCreatePageActions } from '@/modules/app/modules/employees/actions'
 
 
 @Component({
@@ -16,11 +16,12 @@ import { OrganisationCreatePageActions } from '@/modules/app/modules/employees/a
     <mat-grid-list cols="8" rowHeight="400">
       <mat-grid-tile colspan="1"></mat-grid-tile>
       <mat-grid-tile colspan="6">
-        <app-organisation-form
+        <app-employee-form
+            fxFill
           (submitted)="onSubmit($event)"
           [pending]="$pending | async"
           [errorMessage]="$error | async"
-        ></app-organisation-form>
+        ></app-employee-form>
       </mat-grid-tile>
       <mat-grid-tile colspan="1"></mat-grid-tile>
     </mat-grid-list>
@@ -34,14 +35,16 @@ import { OrganisationCreatePageActions } from '@/modules/app/modules/employees/a
 })
 export class CreateEmployeePageComponent implements OnInit
 {
-  $pending = this.store.select(fromOrganisations.selectCreatePagePending);
-  $error = this.store.select(fromOrganisations.selectCreatePageError)
+  $pending = this.store.select(fromEmployeeReducer.selectCreatePagePending);
+  $error = this.store.select(fromEmployeeReducer.selectCreatePageError)
 
-  constructor(private store: Store<fromOrganisations.State>) {}
+  constructor(private store: Store<fromEmployeeReducer.State>) {}
 
   ngOnInit() {}
 
-  onSubmit(organisation: Organisation) {
-    this.store.dispatch(OrganisationCreatePageActions.create({ organisation }))
+  onSubmit(employee: EmployeeStateInterface) {
+    console.log('employee SUBMITING', employee);
+
+    this.store.dispatch(EmployeeCreatePageActions.create({ employee }))
   }
 }

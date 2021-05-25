@@ -1,2 +1,2 @@
-export * from './projects-form.component';
-export * from './projects-list.component';
+export * from './firm-form.component';
+export * from './firm-list.component';
