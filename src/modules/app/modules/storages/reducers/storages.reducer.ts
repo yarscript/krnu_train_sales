@@ -6,7 +6,7 @@ import {
 import { Storage } from "@/modules/app/modules/storages/interfaces/storage-state.interface";
 
 
-export const StoragesFeatureKey = 'storages';
+export const StorageFeatureKey = 'storage';
 
 export interface State
 {
@@ -24,7 +24,7 @@ export const reducer = createReducer(
     return { ...state, storages }
   }),
   on(StorageApiActions.createSuccess, (state, { storage }) => {
-    return { ...state, Storages: [ storage ] }
+    return { ...state, storages: [ storage ] }
   }),
 );
 

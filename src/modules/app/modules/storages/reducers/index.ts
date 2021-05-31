@@ -7,36 +7,36 @@ import * as fromCreatePage    from '@/modules/app/modules/storages/reducers/crea
 import * as fromStorageReducers from '@/modules/app/modules/storages/reducers/storages.reducer';
 
 
-export const StoragesFeatureKey = 'storages';
+export const organisationFeatureKey = 'storages';
 
 
 export interface StorageState
 {
-  [fromStorageReducers.StoragesFeatureKey]: fromStorageReducers.State;
+  [fromStorageReducers.StorageFeatureKey]: fromStorageReducers.State;
   [fromCreatePage.createPageFeatureKey]: fromCreatePage.State;
 }
 
 export interface State extends fromRoot.State
 {
-  [StoragesFeatureKey]: StorageState;
+  [organisationFeatureKey]: StorageState;
 }
 
 export function reducers(state: StorageState | undefined, action: Action) {
   return combineReducers({
     [fromCreatePage.createPageFeatureKey]: fromCreatePage.reducer,
-    [fromStorageReducers.StoragesFeatureKey]: fromStorageReducers.reducer,
+    [fromStorageReducers.StorageFeatureKey]: fromStorageReducers.reducer,
   })(state, action);
 }
 
 export const selectStoragesState = createFeatureSelector<State, StorageState>(
-  StoragesFeatureKey
+  organisationFeatureKey
 );
 
-export const selectFirmEntitiesState = createSelector(
-  selectStoragesState, (state) => state.storages
+export const selectStorageEntitiesState = createSelector(
+  selectStoragesState, (state) => state.storage
 );
 export const selectStorages = createSelector(
-  selectFirmEntitiesState, fromStorageReducers.getStorages
+  selectStorageEntitiesState, fromStorageReducers.getStorages
 );
 
 

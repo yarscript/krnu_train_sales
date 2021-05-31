@@ -8,10 +8,10 @@ import { StorageApiActions } from '@/modules/app/modules/storages/actions'
 
 
 @Component({
-  selector: 'app-organisations-page',
+  selector: 'app-storages-page',
   template: `
     <mat-toolbar fxLayout="row">
-      <h3>Storages</h3>
+      <h3>storages</h3>
       <button
         fxFlexAlign="center"
         fxFlexOffset="85"
@@ -22,9 +22,9 @@ import { StorageApiActions } from '@/modules/app/modules/storages/actions'
     </mat-toolbar>
         <mat-tab-group>
           <mat-tab label="Active">
-            <app-organisation-list
+            <app-storage-list
               [storages]="storages$ | async"
-            ></app-organisation-list>
+            ></app-storage-list>
           </mat-tab>
           <mat-tab label="Archived">Content 2</mat-tab>
           <mat-tab label="Content3">Content 3</mat-tab>

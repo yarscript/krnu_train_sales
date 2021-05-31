@@ -20,7 +20,7 @@ import { map, mergeAll, take } from "rxjs/operators";
 
       <header>
         <app-toolbar (toggleMenu)="toggleSidenav()">
-          <span>Time Tracker Web</span>
+          <span>Train Sales Web</span>
           <button
             mat-raised-button
             color="accent"
@@ -113,31 +113,6 @@ import { map, mergeAll, take } from "rxjs/operators";
             hint="Manage your deals"
           >
             Storages
-          </app-nav-item>
-          <app-nav-item
-            (navigate)="closeSidenav()"
-            *ngIf="loggedIn$ | async"
-            routerLink="/projects"
-            icon="groups"
-            hint="Manage your organisations"
-          >
-            Projects
-          </app-nav-item>
-          <app-nav-item
-            (navigate)="closeSidenav()"
-            *ngIf="loggedIn$ | async"
-            routerLink="{{ routes.books }}"
-            icon="search"
-            hint="Find your next book!"
-          >
-            Browse Books
-          </app-nav-item>
-          <app-nav-item
-            (navigate)="closeSidenav()"
-            *ngIf="loggedIn$ | async"
-            routerLink="/user/service-plan"
-          >
-            Service Plan
           </app-nav-item>
           <app-nav-item
             (navigate)="closeSidenav()"

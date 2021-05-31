@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Storage }             from "@/modules/app/modules/storages/interfaces/storage-state.interface";
+import { Storage }        from "@/modules/app/modules/storages/interfaces/storage-state.interface";
 
 
 export const init = createAction('[Storage/Api] Init');

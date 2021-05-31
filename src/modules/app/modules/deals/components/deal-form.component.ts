@@ -1,33 +1,59 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
-import { Deal }           from "@/modules/app/modules/deals/interfaces/deal-state.interface";
+
+import { Deal as DealStateInterface }           from "@/modules/app/modules/deals/interfaces/deal-state.interface";
 
 @Component({
-  selector: 'app-organisation-form',
+  selector: 'app-deal-form',
   template: `
     <mat-card fxFlexFill>
-      <mat-card-title>Deals form</mat-card-title>
+      <mat-card-title>deals form</mat-card-title>
       <mat-card-content fxLayout="column" fxLayoutAlign="center start">
         <form [formGroup]="form" (ngSubmit)="submit()">
           <p>
             <mat-form-field appearance="outline">
-              <mat-label>Deal Name</mat-label>
+              <mat-label>deal type id</mat-label>
+              
               <input
                 type="text"
                 matInput
-                placeholder="Ex. pat@example.com"
-                formControlName="name"
+                placeholder="Title"
+                formControlName="type_id"
               />
             </mat-form-field>
           </p>
-
-
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>deal employee id</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="employee_id"
+              />
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>deal amount</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="amount"
+              />
+            </mat-form-field>
+          </p>
+          
           <mat-card-footer fxLayout="right">
 
             <p *ngIf="errorMessage" class="loginError">
               {{ errorMessage }}
             </p>
 
+<!--            Submit-->
             <p class="loginButtons">
               <button type="submit" mat-raised-button color="primary">Create</button>
             </p>
@@ -53,10 +79,12 @@ export class DealFormComponent implements OnInit
 
   @Input() errorMessage!: string | null;
 
-  @Output() submitted = new EventEmitter<Deal>();
+  @Output() submitted = new EventEmitter<DealStateInterface>();
 
   form: FormGroup = new FormGroup({
-    'name': new FormControl('')
+    'employee_id': new FormControl(''),
+    'type_id': new FormControl(''),
+    'amount': new FormControl('')
   });
 
   constructor() {}
@@ -66,7 +94,7 @@ export class DealFormComponent implements OnInit
   submit() {
     console.log('submitted');
     if (this.form.valid) {
-      console.log('validated');
+      console.log('validated and sending', this.form.value);
 
       this.submitted.emit(this.form.value)
     }

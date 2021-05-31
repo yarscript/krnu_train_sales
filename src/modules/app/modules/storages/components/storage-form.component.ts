@@ -1,33 +1,47 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
-import { Storage }                   from "@/modules/app/modules/storages/interfaces/storage-state.interface";
+
+import { Storage as StorageStateInterface }           from "@/modules/app/modules/storages/interfaces/storage-state.interface";
 
 @Component({
-  selector: 'app-organisation-form',
+  selector: 'app-storage-form',
   template: `
     <mat-card fxFlexFill>
-      <mat-card-title>Storage form</mat-card-title>
+      <mat-card-title>storages form</mat-card-title>
       <mat-card-content fxLayout="column" fxLayoutAlign="center start">
         <form [formGroup]="form" (ngSubmit)="submit()">
           <p>
             <mat-form-field appearance="outline">
-              <mat-label>Storage Name</mat-label>
+              <mat-label>storage firm id</mat-label>
+              
               <input
                 type="text"
                 matInput
-                placeholder="Ex. pat@example.com"
-                formControlName="name"
+                placeholder="Title"
+                formControlName="firm_id"
               />
             </mat-form-field>
           </p>
-
-
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>storage total slost</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="total_slots"
+              />
+            </mat-form-field>
+          </p>
+          
           <mat-card-footer fxLayout="right">
 
             <p *ngIf="errorMessage" class="loginError">
               {{ errorMessage }}
             </p>
 
+<!--            Submit-->
             <p class="loginButtons">
               <button type="submit" mat-raised-button color="primary">Create</button>
             </p>
@@ -53,10 +67,12 @@ export class StorageFormComponent implements OnInit
 
   @Input() errorMessage!: string | null;
 
-  @Output() submitted = new EventEmitter<Storage>();
+  @Output() submitted = new EventEmitter<StorageStateInterface>();
 
   form: FormGroup = new FormGroup({
-    'name': new FormControl('')
+    'deal_id': new FormControl(''),
+    'type_id': new FormControl(''),
+    'completion_date': new FormControl('')
   });
 
   constructor() {}
@@ -66,7 +82,7 @@ export class StorageFormComponent implements OnInit
   submit() {
     console.log('submitted');
     if (this.form.valid) {
-      console.log('validated');
+      console.log('validated and sending', this.form.value);
 
       this.submitted.emit(this.form.value)
     }

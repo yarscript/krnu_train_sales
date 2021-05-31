@@ -1,8 +1,8 @@
 import { Injectable }                                 from '@angular/core';
 import { Router }                                     from '@angular/router';
 import { Actions, ofType, createEffect, Effect }      from '@ngrx/effects';
-import { of, EMPTY }                                  from 'rxjs';
-import { catchError, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
+import { of, EMPTY }                                             from 'rxjs';
+import { catchError, exhaustMap, map, mergeMap, switchAll, tap } from 'rxjs/operators';
 
 import {
   DealApiActions,
@@ -22,7 +22,7 @@ export class DealEffects
   constructor(
     private router: Router,
     private actions$: Actions,
-    private organisationService$: DealService,
+    private dealService$: DealService,
     private localStorageService$: LocalStorageService,
   ) {}
 
@@ -30,39 +30,37 @@ export class DealEffects
       return this.actions$.pipe(
         ofType(DealApiActions.init),
         exhaustMap(() => {
-          return this.organisationService$.init().pipe(
-            map(
-              response => DealApiActions.initSuccess({ firms: response })
-            )
+          return this.dealService$.init().pipe(
+            map(response => DealApiActions.initSuccess({ deals: <Deal[]>response.data.collection }))
           )
         })
       )
     }
   );
-  //
-  // create$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(OrganisationCreatePageActions.create),
-  //     map(action => action.organisation),
-  //     exhaustMap((organisation: Organisation) => {
-  //       return this.organisationService$.create(organisation).pipe(
-  //         map(response => {
-  //           this.router.navigate(['/firms']).then();
-  //           return OrganisationApiActions.createSuccess({ organisation: response.data });
-  //         }),
-  //         catchError(err => {
-  //           return of(OrganisationApiActions.createFailure(err));
-  //         })
-  //       )
-  //     })
-  //   )
-  // });
+
+  create$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DealCreatePageActions.create),
+      map(action => action.deal),
+      exhaustMap((deal: Deal) => {
+        return this.dealService$.create(deal).pipe(
+          map(response => {
+            this.router.navigate(['/deal']).then();
+            return DealApiActions.createSuccess({ deal: response.data });
+          }),
+          catchError(err => {
+            return of(DealApiActions.createFailure(err));
+          })
+        )
+      })
+    )
+  });
 
   // createSuccess$ = createEffect(() => {
   //   return this.actions$.pipe(
   //     ofType(OrganisationApiActions.createSuccess),
   //     tap(() => {
-  //       return this.router.navigate([ '/firms' ])
+  //       return this.router.navigate([ '/Deals' ])
   //     })
   //   )
   // });

@@ -8,19 +8,19 @@ import { StorageCreatePageActions } from '@/modules/app/modules/storages/actions
 
 
 @Component({
-  selector: 'app-create-organisation-page',
+  selector: 'app-create-storage-page',
   template: `
     <mat-toolbar>
-      <h3>Create Storage</h3>
+      <h3>Create deal</h3>
     </mat-toolbar>
     <mat-grid-list cols="8" rowHeight="400">
       <mat-grid-tile colspan="1"></mat-grid-tile>
       <mat-grid-tile colspan="6">
-        <app-organisation-form
+        <app-storage-form
           (submitted)="onSubmit($event)"
           [pending]="$pending | async"
           [errorMessage]="$error | async"
-        ></app-organisation-form>
+        ></app-storage-form>
       </mat-grid-tile>
       <mat-grid-tile colspan="1"></mat-grid-tile>
     </mat-grid-list>
@@ -35,6 +35,7 @@ import { StorageCreatePageActions } from '@/modules/app/modules/storages/actions
 export class CreateStoragePageComponent implements OnInit
 {
   $pending = this.store.select(fromStorageReducers.selectCreatePagePending);
+
   $error = this.store.select(fromStorageReducers.selectCreatePageError)
 
   constructor(private store: Store<fromStorageReducers.State>) {}

@@ -1,13 +1,13 @@
 import { Injectable }                                 from '@angular/core';
 import { Router }                                     from '@angular/router';
-import { Actions, ofType, createEffect }      from '@ngrx/effects';
-import { of, EMPTY }                                  from 'rxjs';
-import { catchError, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
+import { Actions, ofType, createEffect, Effect }      from '@ngrx/effects';
+import { of, EMPTY }                                             from 'rxjs';
+import { catchError, exhaustMap, map, mergeMap, switchAll, tap } from 'rxjs/operators';
 
 import {
-    DocumentApiActions,
-    DocumentCreatePageActions,
-    DocumentActions
+  DocumentApiActions,
+  DocumentActions,
+  DocumentCreatePageActions
 }                       from '@/modules/app/modules/documents/actions'
 import { Document } from "@/modules/app/modules/documents/interfaces/document-state.interface";
 import { DocumentService }  from "@/modules/app/modules/documents/services/document.service";
@@ -22,7 +22,7 @@ export class DocumentEffects
   constructor(
     private router: Router,
     private actions$: Actions,
-    private organisationService$: DocumentService,
+    private documentService$: DocumentService,
     private localStorageService$: LocalStorageService,
   ) {}
 
@@ -30,39 +30,37 @@ export class DocumentEffects
       return this.actions$.pipe(
         ofType(DocumentApiActions.init),
         exhaustMap(() => {
-          return this.organisationService$.init().pipe(
-            map(
-              response => DocumentApiActions.initSuccess({ documents: response })
-            )
+          return this.documentService$.init().pipe(
+            map(response => DocumentApiActions.initSuccess({ documents: <Document[]>response.data.collection }))
           )
         })
       )
     }
   );
-  //
-  // create$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(OrganisationCreatePageActions.create),
-  //     map(action => action.organisation),
-  //     exhaustMap((organisation: Organisation) => {
-  //       return this.organisationService$.create(organisation).pipe(
-  //         map(response => {
-  //           this.router.navigate(['/firms']).then();
-  //           return OrganisationApiActions.createSuccess({ organisation: response.data });
-  //         }),
-  //         catchError(err => {
-  //           return of(OrganisationApiActions.createFailure(err));
-  //         })
-  //       )
-  //     })
-  //   )
-  // });
+
+  create$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(DocumentCreatePageActions.create),
+      map(action => action.document),
+      exhaustMap((document: Document) => {
+        return this.documentService$.create(document).pipe(
+          map(response => {
+            this.router.navigate(['/document']).then();
+            return DocumentApiActions.createSuccess({ document: response.data });
+          }),
+          catchError(err => {
+            return of(DocumentApiActions.createFailure(err));
+          })
+        )
+      })
+    )
+  });
 
   // createSuccess$ = createEffect(() => {
   //   return this.actions$.pipe(
   //     ofType(OrganisationApiActions.createSuccess),
   //     tap(() => {
-  //       return this.router.navigate([ '/firms' ])
+  //       return this.router.navigate([ '/Documents' ])
   //     })
   //   )
   // });

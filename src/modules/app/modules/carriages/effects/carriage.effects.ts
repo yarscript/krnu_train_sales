@@ -1,23 +1,23 @@
 import { Injectable }                                 from '@angular/core';
 import { Router }                                     from '@angular/router';
 import { Actions, ofType, createEffect, Effect }      from '@ngrx/effects';
-import { of, EMPTY }                                  from 'rxjs';
-import { catchError, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
+import { of, EMPTY }                                             from 'rxjs';
+import { catchError, exhaustMap, map, mergeMap, switchAll, tap } from 'rxjs/operators';
 
 import {
-  CarriageCreatePageActions,
+  CarriageApiActions,
   CarriageActions,
-  CarriageApiActions
+  CarriageCreatePageActions
 }                       from '@/modules/app/modules/carriages/actions'
 import { Carriage } from "@/modules/app/modules/carriages/interfaces/carriage-state.interface";
 import { CarriageService }  from "@/modules/app/modules/carriages/services/carriage.service";
 import { LocalStorageService } from "@/modules/core/local-storage/local-storage.service";
 
 
-// const ORGANISATIONS_KEY = 'ORGANISATIONS';
+const ORGANISATIONS_KEY = 'ORGANISATIONS';
 
 @Injectable()
-export class FirmEffects
+export class CarriageEffects
 {
   constructor(
     private router: Router,
@@ -31,38 +31,36 @@ export class FirmEffects
         ofType(CarriageApiActions.init),
         exhaustMap(() => {
           return this.carriageService$.init().pipe(
-            map(
-              response => CarriageApiActions.initSuccess({ carriages: response })
-            )
+            map(response => CarriageApiActions.initSuccess({ carriages: <Carriage[]>response.data.collection }))
           )
         })
       )
     }
   );
-  //
-  // create$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(OrganisationCreatePageActions.create),
-  //     map(action => action.organisation),
-  //     exhaustMap((organisation: Organisation) => {
-  //       return this.organisationService$.create(organisation).pipe(
-  //         map(response => {
-  //           this.router.navigate(['/firms']).then();
-  //           return OrganisationApiActions.createSuccess({ organisation: response.data });
-  //         }),
-  //         catchError(err => {
-  //           return of(OrganisationApiActions.createFailure(err));
-  //         })
-  //       )
-  //     })
-  //   )
-  // });
+
+  create$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CarriageCreatePageActions.create),
+      map(action => action.carriage),
+      exhaustMap((carriage: Carriage) => {
+        return this.carriageService$.create(carriage).pipe(
+          map(response => {
+            this.router.navigate(['/carriage']).then();
+            return CarriageApiActions.createSuccess({ carriage: response.data });
+          }),
+          catchError(err => {
+            return of(CarriageApiActions.createFailure(err));
+          })
+        )
+      })
+    )
+  });
 
   // createSuccess$ = createEffect(() => {
   //   return this.actions$.pipe(
   //     ofType(OrganisationApiActions.createSuccess),
   //     tap(() => {
-  //       return this.router.navigate([ '/firms' ])
+  //       return this.router.navigate([ '/Carriages' ])
   //     })
   //   )
   // });

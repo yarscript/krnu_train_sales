@@ -6,7 +6,7 @@ import {
 import { Carriage } from "@/modules/app/modules/carriages/interfaces/carriage-state.interface";
 
 
-export const CarriageFeatureKey = 'carriages';
+export const CarriageFeatureKey = 'carriage';
 
 export interface State
 {
@@ -24,7 +24,7 @@ export const reducer = createReducer(
     return { ...state, carriages }
   }),
   on(CarriageApiActions.createSuccess, (state, { carriage }) => {
-    return { ...state, Firms: [ carriage ] }
+    return { ...state, carriages: [ carriage ] }
   }),
 );
 

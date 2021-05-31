@@ -8,7 +8,8 @@ import {
 }                                                from "@/modules/app/modules/deals/interfaces/deal-state.interface";
 import { ConfigService as RequestConfigService } from '@/modules/http/http.module';
 
-import * as fromAuthEffects from '@/modules/auth/effects'
+import * as fromAuthEffects  from '@/modules/auth/effects'
+import { ResponseInterface } from "@/modules/http/request/interfaces/response.interface";
 
 
 // TODO['removeDebug'] = 'remove debug header'
@@ -19,7 +20,7 @@ import * as fromAuthEffects from '@/modules/auth/effects'
 })
 export class DealService
 {
-  protected httpOptions: Object
+  protected httpHeaders: Object
 
   constructor(
     protected http: HttpClient,
@@ -28,7 +29,7 @@ export class DealService
   ) {
     let auth = this.localStorage.getItem(fromAuthEffects.AUTH_KEY);
 
-    this.httpOptions = {
+    this.httpHeaders = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'XDEBUG_SESSION_START': 'PHPSTORM',
@@ -36,23 +37,23 @@ export class DealService
       })
     }
   }
-
-  init(): Observable<Deal[]> {
-    const response = this.http.get<Deal[]>(
-      this.config.getConfig().url.api + '/deal', this.httpOptions
+  // [Deal/Api] Init
+  init(): Observable<ResponseInterface> {
+    const response = this.http.get<ResponseInterface>(
+      this.config.getConfig().url.api + '/deal', this.httpHeaders
     );
 
-    console.log('ORG INIT RESPONSE', response)
+    console.log('Deal INIT RESPONSE', response)
 
     return response;
   }
 
-  create({ name }: Deal): Observable<any> {
+  create(dealData : Deal): Observable<any> {
     const response = this.http.post<Deal>(
-      this.config.getConfig().url.api + '/organisation/create', { name }, this.httpOptions
+      this.config.getConfig().url.api + '/deal/create',  dealData, this.httpHeaders
     );
 
-    console.log('RESPONSE ORGS ====>> ', response);
+    console.log('Deal DATA ====>> ', dealData);
 
     return response;
   }

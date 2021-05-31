@@ -31,7 +31,7 @@ export const COMPONENTS = [
     ReactiveFormsModule,
 
     StoreModule.forFeature({
-      name: fromDocumentReducers.DocumentsFeatureKey,
+      name: fromDocumentReducers.organisationFeatureKey,
       reducer: fromDocumentReducers.reducers,
     }),
     EffectsModule.forFeature([ DocumentEffects ])

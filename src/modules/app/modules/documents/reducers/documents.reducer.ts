@@ -6,7 +6,7 @@ import {
 import { Document } from "@/modules/app/modules/documents/interfaces/document-state.interface";
 
 
-export const DocumentsFeatureKey = 'documents';
+export const DocumentFeatureKey = 'document';
 
 export interface State
 {

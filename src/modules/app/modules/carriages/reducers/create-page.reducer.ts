@@ -1,8 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 
 import {
-  FirmApiActions, FirmCreatePageActions
-} from '@/modules/app/modules/firms/actions'
+  CarriageApiActions, CarriageCreatePageActions
+} from '@/modules/app/modules/carriages/actions'
 
 
 export const createPageFeatureKey = 'createPage';
@@ -20,13 +20,13 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(FirmCreatePageActions.create, (state) => ({
+  on(CarriageCreatePageActions.create, (state) => ({
     ...state, error: null, pending: true
   })),
-  on(FirmApiActions.createSuccess, (state) => ({
+  on(CarriageApiActions.createSuccess, (state) => ({
     ...state, error: null, pending: false
   })),
-  on(FirmApiActions.createFailure, (state, { err }) => ({
+  on(CarriageApiActions.createFailure, (state, { err }) => ({
     ...state, error: err, pending: false
   }))
 );

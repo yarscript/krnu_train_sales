@@ -1,1 +1,1 @@
-export * from './firm.effects';
+export * from './carriage.effects';

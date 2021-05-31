@@ -8,7 +8,7 @@ import { CreateStoragePageComponent } from "@/modules/app/modules/storages/conta
 
 const routes: Routes = [
   { path: '', component: StoragesPageComponent, data: { title: 'storages' } },
-  { path: 'create', component: CreateStoragePageComponent, data: { title: 'Create Storage' } }
+  { path: 'create', component: CreateStoragePageComponent, data: { title: 'Create Storages' } }
 ];
 
 @NgModule({

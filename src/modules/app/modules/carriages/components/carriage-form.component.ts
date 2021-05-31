@@ -1,34 +1,71 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
 
-import { Carriage }           from "@/modules/app/modules/carriages/interfaces/carriage-state.interface";
+import { Carriage as CarriageStateInterface }           from "@/modules/app/modules/carriages/interfaces/carriage-state.interface";
 
 @Component({
-  selector: 'app-organisation-form',
+  selector: 'app-carriage-form',
   template: `
     <mat-card fxFlexFill>
-      <mat-card-title>Firms form</mat-card-title>
+      <mat-card-title>carriages form</mat-card-title>
       <mat-card-content fxLayout="column" fxLayoutAlign="center start">
         <form [formGroup]="form" (ngSubmit)="submit()">
           <p>
             <mat-form-field appearance="outline">
-              <mat-label>Carriage Name</mat-label>
+              <mat-label>carriage storage id</mat-label>
+              
               <input
                 type="text"
                 matInput
-                placeholder="Ex. pat@example.com"
-                formControlName="name"
+                placeholder="Title"
+                formControlName="storage_id"
               />
             </mat-form-field>
           </p>
-
-
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>carriage number</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="number"
+              />
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>carriage receiving date</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="receiving_date"
+              />
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>carriage type id</mat-label>
+              
+              <input
+                type="text"
+                matInput
+                placeholder=""
+                formControlName="type_id"
+              />
+            </mat-form-field>
+          </p>
+          
           <mat-card-footer fxLayout="right">
 
             <p *ngIf="errorMessage" class="loginError">
               {{ errorMessage }}
             </p>
 
+<!--            Submit-->
             <p class="loginButtons">
               <button type="submit" mat-raised-button color="primary">Create</button>
             </p>
@@ -54,10 +91,13 @@ export class CarriageFormComponent implements OnInit
 
   @Input() errorMessage!: string | null;
 
-  @Output() submitted = new EventEmitter<Carriage>();
+  @Output() submitted = new EventEmitter<CarriageStateInterface>();
 
   form: FormGroup = new FormGroup({
-    'name': new FormControl('')
+    'storage_id': new FormControl(''),
+    'number': new FormControl(''),
+    'receiving_date': new FormControl(''),
+    'type_id': new FormControl('')
   });
 
   constructor() {}
@@ -67,7 +107,7 @@ export class CarriageFormComponent implements OnInit
   submit() {
     console.log('submitted');
     if (this.form.valid) {
-      console.log('validated');
+      console.log('validated and sending', this.form.value);
 
       this.submitted.emit(this.form.value)
     }

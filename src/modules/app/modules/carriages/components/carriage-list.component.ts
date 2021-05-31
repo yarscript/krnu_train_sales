@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
 import { Carriage }           from "@/modules/app/modules/carriages/interfaces/carriage-state.interface";
-import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
+import * as fromOrganisations     from "@/modules/app/modules/carriages/reducers";
 
 
 @Component({
-  selector: 'app-organisation-list',
+  selector: 'app-carriage-list',
   template:
     `
       <mat-card>
@@ -13,15 +13,20 @@ import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
         <table class="table table-striped">
           <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
+            <th scope="col">Storage id</th>
+            <th scope="col">Number</th>
+            <th scope="col">Receiving date</th>
+            <th scope="col">Type</th>
           </tr>
           </thead>
 
           <tbody>
-          <tr *ngFor="let firm of firms; index as i">
+          <tr *ngFor="let carriage of carriages; index as i">
             <th scope="row">{{ i + 1 }}</th>
-            <td>{{ firm.name }}</td>
+            <td>{{ carriage.storage_id }}</td>
+            <td>{{ carriage.number }}</td>
+            <td>{{ carriage.receiving_date }}</td>
+            <td>{{ carriage.type_id }}</td>
           </tr>
           </tbody>
         </table>
@@ -36,7 +41,7 @@ import * as fromOrganisations     from "@/modules/app/modules/firms/reducers";
 })
 export class CarriageListComponent
 {
-  @Input() firms: Carriage[];
+  @Input() carriages: Carriage[];
 
   displayedColumns: string[] = [ 'position', 'name' ];
 

@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
-
 import { Storage }           from "@/modules/app/modules/storages/interfaces/storage-state.interface";
-import * as fromStoragesReducer     from "@/modules/app/modules/storages/reducers";
+import * as fromOrganisations     from "@/modules/app/modules/storages/reducers";
 
 
 @Component({
-  selector: 'app-organisation-list',
+  selector: 'app-storage-list',
   template:
     `
       <mat-card>
@@ -15,14 +14,17 @@ import * as fromStoragesReducer     from "@/modules/app/modules/storages/reducer
           <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
+            <th scope="col">Storage firm id</th>
+            <th scope="col">Total slots</th>
           </tr>
           </thead>
 
           <tbody>
           <tr *ngFor="let storage of storages; index as i">
             <th scope="row">{{ i + 1 }}</th>
-            <td>{{ storage.name }}</td>
+            <td>{{ storage.storage_id }}</td>
+            <td>{{ storage.firm_id }}</td>
+            <td>{{ storage.total_slots }}</td>
           </tr>
           </tbody>
         </table>

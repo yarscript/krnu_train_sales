@@ -7,8 +7,8 @@ import {
 import { CreateDealPageComponent } from "@/modules/app/modules/deals/contatiners/create-deal-page.component";
 
 const routes: Routes = [
-  { path: '', component: DealsPageComponent, data: { title: 'firms' } },
-  { path: 'create', component: CreateDealPageComponent, data: { title: 'Create Firms' } }
+  { path: '', component: DealsPageComponent, data: { title: 'deals' } },
+  { path: 'create', component: CreateDealPageComponent, data: { title: 'Create Deals' } }
 ];
 
 @NgModule({

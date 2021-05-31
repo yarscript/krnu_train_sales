@@ -5,7 +5,7 @@ import { StoreModule }         from "@ngrx/store";
 import { EffectsModule }       from "@ngrx/effects";
 
 import { MaterialModule }     from "@/modules/shared/modules/material";
-import { StorageEffects }           from "@/modules/app/modules/storages/effects/storage.effects";
+import { StorageEffects }       from "@/modules/app/modules/storages/effects/storage.effects";
 import { StoragesRoutingModule } from './storages-routing.module';
 
 import * as fromPages         from './contatiners';
@@ -31,7 +31,7 @@ export const COMPONENTS = [
     ReactiveFormsModule,
 
     StoreModule.forFeature({
-      name: fromStorageReducers.StoragesFeatureKey,
+      name: fromStorageReducers.organisationFeatureKey,
       reducer: fromStorageReducers.reducers,
     }),
     EffectsModule.forFeature([ StorageEffects ])

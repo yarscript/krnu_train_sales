@@ -8,7 +8,8 @@ import {
 }                                                from "@/modules/app/modules/storages/interfaces/storage-state.interface";
 import { ConfigService as RequestConfigService } from '@/modules/http/http.module';
 
-import * as fromAuthEffects from '@/modules/auth/effects'
+import * as fromAuthEffects  from '@/modules/auth/effects'
+import { ResponseInterface } from "@/modules/http/request/interfaces/response.interface";
 
 
 // TODO['removeDebug'] = 'remove debug header'
@@ -19,7 +20,7 @@ import * as fromAuthEffects from '@/modules/auth/effects'
 })
 export class StorageService
 {
-  protected httpOptions: Object
+  protected httpHeaders: Object
 
   constructor(
     protected http: HttpClient,
@@ -28,7 +29,7 @@ export class StorageService
   ) {
     let auth = this.localStorage.getItem(fromAuthEffects.AUTH_KEY);
 
-    this.httpOptions = {
+    this.httpHeaders = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'XDEBUG_SESSION_START': 'PHPSTORM',
@@ -36,23 +37,23 @@ export class StorageService
       })
     }
   }
-
-  init(): Observable<Storage[]> {
-    const response = this.http.get<Storage[]>(
-      this.config.getConfig().url.api + '/organisation', this.httpOptions
+  // [Storage/Api] Init
+  init(): Observable<ResponseInterface> {
+    const response = this.http.get<ResponseInterface>(
+      this.config.getConfig().url.api + '/storage', this.httpHeaders
     );
 
-    console.log('ORG INIT RESPONSE', response)
+    console.log('Storage INIT RESPONSE', response)
 
     return response;
   }
 
-  create({ name }: Storage): Observable<any> {
+  create(storageData : Storage): Observable<any> {
     const response = this.http.post<Storage>(
-      this.config.getConfig().url.api + '/organisation/create', { name }, this.httpOptions
+      this.config.getConfig().url.api + '/storage/create',  storageData, this.httpHeaders
     );
 
-    console.log('RESPONSE ORGS ====>> ', response);
+    console.log('Storage DATA ====>> ', storageData);
 
     return response;
   }

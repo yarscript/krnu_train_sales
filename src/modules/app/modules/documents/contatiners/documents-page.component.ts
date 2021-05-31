@@ -8,10 +8,10 @@ import { DocumentApiActions } from '@/modules/app/modules/documents/actions'
 
 
 @Component({
-  selector: 'app-organisations-page',
+  selector: 'app-documents-page',
   template: `
     <mat-toolbar fxLayout="row">
-      <h3>Documents</h3>
+      <h3>documents</h3>
       <button
         fxFlexAlign="center"
         fxFlexOffset="85"
@@ -22,9 +22,9 @@ import { DocumentApiActions } from '@/modules/app/modules/documents/actions'
     </mat-toolbar>
         <mat-tab-group>
           <mat-tab label="Active">
-            <app-organisation-list
+            <app-document-list
               [documents]="documents$ | async"
-            ></app-organisation-list>
+            ></app-document-list>
           </mat-tab>
           <mat-tab label="Archived">Content 2</mat-tab>
           <mat-tab label="Content3">Content 3</mat-tab>

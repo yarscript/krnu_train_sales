@@ -3,11 +3,11 @@ import {
 } from '@ngrx/store';
 
 import * as fromRoot          from '@/modules/app/reducers';
-import * as fromCreatePage   from '@/modules/app/modules/deals/reducers/create-page.reducer';
+import * as fromCreatePage    from '@/modules/app/modules/deals/reducers/create-page.reducer';
 import * as fromDealReducers from '@/modules/app/modules/deals/reducers/deals.reducer';
 
 
-export const DealsFeatureKey = 'deals';
+export const organisationFeatureKey = 'deals';
 
 
 export interface DealState
@@ -18,7 +18,7 @@ export interface DealState
 
 export interface State extends fromRoot.State
 {
-  [DealsFeatureKey]: DealState;
+  [organisationFeatureKey]: DealState;
 }
 
 export function reducers(state: DealState | undefined, action: Action) {
@@ -29,7 +29,7 @@ export function reducers(state: DealState | undefined, action: Action) {
 }
 
 export const selectDealsState = createFeatureSelector<State, DealState>(
-  DealsFeatureKey
+  organisationFeatureKey
 );
 
 export const selectDealEntitiesState = createSelector(

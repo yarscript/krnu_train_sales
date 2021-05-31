@@ -10,7 +10,7 @@ import { DealsRoutingModule } from './deals-routing.module';
 
 import * as fromPages         from './contatiners';
 import * as fromComponents    from './components';
-import * as fromFirmReducers from './reducers';
+import * as fromDealReducers from './reducers';
 
 export const COMPONENTS = [
   fromPages.DealsPageComponent,
@@ -31,8 +31,8 @@ export const COMPONENTS = [
     ReactiveFormsModule,
 
     StoreModule.forFeature({
-      name: fromFirmReducers.DealsFeatureKey,
-      reducer: fromFirmReducers.reducers,
+      name: fromDealReducers.organisationFeatureKey,
+      reducer: fromDealReducers.reducers,
     }),
     EffectsModule.forFeature([ DealEffects ])
   ]

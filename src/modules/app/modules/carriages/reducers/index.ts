@@ -2,16 +2,15 @@ import {
   createSelector, createFeatureSelector, Action, combineReducers,
 } from '@ngrx/store';
 
-import * as fromRoot             from '@/modules/app/reducers';
-import * as fromCreatePage       from '@/modules/app/modules/carriages/reducers/create-page.reducer';
+import * as fromRoot          from '@/modules/app/reducers';
+import * as fromCreatePage    from '@/modules/app/modules/carriages/reducers/create-page.reducer';
 import * as fromCarriageReducers from '@/modules/app/modules/carriages/reducers/carriages.reducer';
-import { Carriage }              from "@/modules/app/modules/carriages/interfaces/carriage-state.interface";
 
 
-export const CarriagesFeatureKey = 'carriages';
+export const organisationFeatureKey = 'carriages';
 
 
-export interface CarriagesState
+export interface CarriageState
 {
   [fromCarriageReducers.CarriageFeatureKey]: fromCarriageReducers.State;
   [fromCreatePage.createPageFeatureKey]: fromCreatePage.State;
@@ -19,24 +18,24 @@ export interface CarriagesState
 
 export interface State extends fromRoot.State
 {
-  [CarriagesFeatureKey]: Carriage;
+  [organisationFeatureKey]: CarriageState;
 }
 
-export function reducers(state: CarriagesState | undefined, action: Action) {
+export function reducers(state: CarriageState | undefined, action: Action) {
   return combineReducers({
     [fromCreatePage.createPageFeatureKey]: fromCreatePage.reducer,
     [fromCarriageReducers.CarriageFeatureKey]: fromCarriageReducers.reducer,
   })(state, action);
 }
 
-export const selectCarriagesState = createFeatureSelector<State, CarriagesState>(
-  CarriagesFeatureKey
+export const selectCarriagesState = createFeatureSelector<State, CarriageState>(
+  organisationFeatureKey
 );
 
 export const selectCarriageEntitiesState = createSelector(
-  selectCarriagesState, (state) => state.carriages
+  selectCarriagesState, (state) => state.carriage
 );
-export const selectFirms = createSelector(
+export const selectCarriages = createSelector(
   selectCarriageEntitiesState, fromCarriageReducers.getCarriages
 );
 

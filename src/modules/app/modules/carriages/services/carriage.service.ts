@@ -8,7 +8,8 @@ import {
 }                                                from "@/modules/app/modules/carriages/interfaces/carriage-state.interface";
 import { ConfigService as RequestConfigService } from '@/modules/http/http.module';
 
-import * as fromAuthEffects from '@/modules/auth/effects'
+import * as fromAuthEffects  from '@/modules/auth/effects'
+import { ResponseInterface } from "@/modules/http/request/interfaces/response.interface";
 
 
 // TODO['removeDebug'] = 'remove debug header'
@@ -19,7 +20,7 @@ import * as fromAuthEffects from '@/modules/auth/effects'
 })
 export class CarriageService
 {
-  protected httpOptions: Object
+  protected httpHeaders: Object
 
   constructor(
     protected http: HttpClient,
@@ -28,7 +29,7 @@ export class CarriageService
   ) {
     let auth = this.localStorage.getItem(fromAuthEffects.AUTH_KEY);
 
-    this.httpOptions = {
+    this.httpHeaders = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'XDEBUG_SESSION_START': 'PHPSTORM',
@@ -36,23 +37,23 @@ export class CarriageService
       })
     }
   }
-
-  init(): Observable<Carriage[]> {
-    const response = this.http.get<Carriage[]>(
-      this.config.getConfig().url.api + '/carriage', this.httpOptions
+  // [Carriage/Api] Init
+  init(): Observable<ResponseInterface> {
+    const response = this.http.get<ResponseInterface>(
+      this.config.getConfig().url.api + '/carriage', this.httpHeaders
     );
 
-    console.log('ORG INIT RESPONSE', response)
+    console.log('Carriage INIT RESPONSE', response)
 
     return response;
   }
 
-  create({ name }: Carriage): Observable<any> {
+  create(carriageData : Carriage): Observable<any> {
     const response = this.http.post<Carriage>(
-      this.config.getConfig().url.api + '/organisation/create', { name }, this.httpOptions
+      this.config.getConfig().url.api + '/carriage/create',  carriageData, this.httpHeaders
     );
 
-    console.log('RESPONSE ORGS ====>> ', response);
+    console.log('Carriage DATA ====>> ', carriageData);
 
     return response;
   }

@@ -1,13 +1,13 @@
 import { Injectable }                                 from '@angular/core';
 import { Router }                                     from '@angular/router';
 import { Actions, ofType, createEffect, Effect }      from '@ngrx/effects';
-import { of, EMPTY }                                  from 'rxjs';
-import { catchError, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
+import { of, EMPTY }                                             from 'rxjs';
+import { catchError, exhaustMap, map, mergeMap, switchAll, tap } from 'rxjs/operators';
 
 import {
-    StorageApiActions,
-    StorageActions,
-    StorageCreatePageActions
+  StorageApiActions,
+  StorageActions,
+  StorageCreatePageActions
 }                       from '@/modules/app/modules/storages/actions'
 import { Storage } from "@/modules/app/modules/storages/interfaces/storage-state.interface";
 import { StorageService }  from "@/modules/app/modules/storages/services/storage.service";
@@ -22,7 +22,7 @@ export class StorageEffects
   constructor(
     private router: Router,
     private actions$: Actions,
-    private organisationService$: StorageService,
+    private storageService$: StorageService,
     private localStorageService$: LocalStorageService,
   ) {}
 
@@ -30,39 +30,37 @@ export class StorageEffects
       return this.actions$.pipe(
         ofType(StorageApiActions.init),
         exhaustMap(() => {
-          return this.organisationService$.init().pipe(
-            map(
-              response => StorageApiActions.initSuccess({ storages: response })
-            )
+          return this.storageService$.init().pipe(
+            map(response => StorageApiActions.initSuccess({ storages: <Storage[]>response.data.collection }))
           )
         })
       )
     }
   );
-  //
-  // create$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(OrganisationCreatePageActions.create),
-  //     map(action => action.organisation),
-  //     exhaustMap((organisation: Organisation) => {
-  //       return this.organisationService$.create(organisation).pipe(
-  //         map(response => {
-  //           this.router.navigate(['/firms']).then();
-  //           return OrganisationApiActions.createSuccess({ organisation: response.data });
-  //         }),
-  //         catchError(err => {
-  //           return of(OrganisationApiActions.createFailure(err));
-  //         })
-  //       )
-  //     })
-  //   )
-  // });
+
+  create$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(StorageCreatePageActions.create),
+      map(action => action.storage),
+      exhaustMap((storage: Storage) => {
+        return this.storageService$.create(storage).pipe(
+          map(response => {
+            this.router.navigate(['/storage']).then();
+            return StorageApiActions.createSuccess({ storage: response.data });
+          }),
+          catchError(err => {
+            return of(StorageApiActions.createFailure(err));
+          })
+        )
+      })
+    )
+  });
 
   // createSuccess$ = createEffect(() => {
   //   return this.actions$.pipe(
   //     ofType(OrganisationApiActions.createSuccess),
   //     tap(() => {
-  //       return this.router.navigate([ '/firms' ])
+  //       return this.router.navigate([ '/Storages' ])
   //     })
   //   )
   // });

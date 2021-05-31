@@ -32,9 +32,25 @@ export const routes: Routes = [
         path        : routesNames.employees,
         loadChildren: () => import('@/modules/app/modules/employees/employees.module').then((m) => m.EmployeesModule),
     },
+    {
+        path        : routesNames.deals,
+        loadChildren: () => import('@/modules/app/modules/deals/deals.module').then((m) => m.DealsModule),
+    },
+    {
+        path        : routesNames.carriages,
+        loadChildren: () => import('@/modules/app/modules/carriages/carriages.module').then((m) => m.CarriagesModule),
+    },
+    {
+        path        : routesNames.documents,
+        loadChildren: () => import('@/modules/app/modules/documents/documents.module').then((m) => m.DocumentsModule),
+    },
+    {
+        path        : routesNames.storages,
+        loadChildren: () => import('@/modules/app/modules/storages/storages.module').then((m) => m.StoragesModule),
+    },
     // {
     //     path        : routesNames.deals,
-    //     loadChildren: () => import('@/modules/app/modules/deals/deals.module').then((m) => m.DealsModule),
+    //     loadChildren: () => import('@/modules/app/modules/deals/deals.module').then((m) => m.CarriagesModule),
     // },
     // {
     //     path: routesNames.carriages,
@@ -42,7 +58,7 @@ export const routes: Routes = [
     // },
     // {
     //     path: routesNames.documents,
-    //     loadChildren: () => import('@/modules/app/modules/documents/documents.module').then(m => m.DocumentsModule),
+    //     loadChildren: () => import('@/modules/app/modules/documents/documents.module').then(m => m.StoragesModule),
     // },
     // {
     //     path: routesNames.storages,

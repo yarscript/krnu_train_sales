@@ -7,33 +7,33 @@ import * as fromCreatePage    from '@/modules/app/modules/documents/reducers/cre
 import * as fromDocumentReducers from '@/modules/app/modules/documents/reducers/documents.reducer';
 
 
-export const DocumentsFeatureKey = 'documents';
+export const organisationFeatureKey = 'documents';
 
 
 export interface DocumentState
 {
-  [fromDocumentReducers.DocumentsFeatureKey]: fromDocumentReducers.State;
+  [fromDocumentReducers.DocumentFeatureKey]: fromDocumentReducers.State;
   [fromCreatePage.createPageFeatureKey]: fromCreatePage.State;
 }
 
 export interface State extends fromRoot.State
 {
-  [DocumentsFeatureKey]: DocumentState;
+  [organisationFeatureKey]: DocumentState;
 }
 
 export function reducers(state: DocumentState | undefined, action: Action) {
   return combineReducers({
     [fromCreatePage.createPageFeatureKey]: fromCreatePage.reducer,
-    [fromDocumentReducers.DocumentsFeatureKey]: fromDocumentReducers.reducer,
+    [fromDocumentReducers.DocumentFeatureKey]: fromDocumentReducers.reducer,
   })(state, action);
 }
 
 export const selectDocumentsState = createFeatureSelector<State, DocumentState>(
-  DocumentsFeatureKey
+  organisationFeatureKey
 );
 
 export const selectDocumentEntitiesState = createSelector(
-  selectDocumentsState, (state) => state.documents
+  selectDocumentsState, (state) => state.document
 );
 export const selectDocuments = createSelector(
   selectDocumentEntitiesState, fromDocumentReducers.getDocuments

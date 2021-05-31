@@ -7,8 +7,8 @@ import {
 import { CreateCarriagePageComponent } from "@/modules/app/modules/carriages/contatiners/create-carriage-page.component";
 
 const routes: Routes = [
-  { path: '', component: CarriagesPageComponent, data: { title: 'firms' } },
-  { path: 'create', component: CreateCarriagePageComponent, data: { title: 'Create Firms' } }
+  { path: '', component: CarriagesPageComponent, data: { title: 'carriages' } },
+  { path: 'create', component: CreateCarriagePageComponent, data: { title: 'Create Carriages' } }
 ];
 
 @NgModule({

@@ -5,7 +5,7 @@ import { StoreModule }         from "@ngrx/store";
 import { EffectsModule }       from "@ngrx/effects";
 
 import { MaterialModule }     from "@/modules/shared/modules/material";
-import { FirmEffects }            from "@/modules/app/modules/firms/effects/firm.effects";
+import { CarriageEffects }            from "@/modules/app/modules/carriages/effects/carriage.effects";
 import { CarriagesRoutingModule } from './carriages-routing.module';
 
 import * as fromPages         from './contatiners';
@@ -31,10 +31,10 @@ export const COMPONENTS = [
     ReactiveFormsModule,
 
     StoreModule.forFeature({
-      name: fromCarriageReducers.CarriagesFeatureKey,
+      name: fromCarriageReducers.organisationFeatureKey,
       reducer: fromCarriageReducers.reducers,
     }),
-    EffectsModule.forFeature([ FirmEffects ])
+    EffectsModule.forFeature([ CarriageEffects ])
   ]
 })
 export class CarriagesModule
