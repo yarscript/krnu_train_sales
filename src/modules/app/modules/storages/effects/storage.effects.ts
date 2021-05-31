@@ -31,7 +31,7 @@ export class StorageEffects
         ofType(StorageApiActions.init),
         exhaustMap(() => {
           return this.storageService$.init().pipe(
-            map(response => StorageApiActions.initSuccess({ storages: <Storage[]>response.data.collection }))
+            map(response => StorageApiActions.initSuccess({ storages: <Storage[]>response.data.data }))
           )
         })
       )
@@ -45,7 +45,7 @@ export class StorageEffects
       exhaustMap((storage: Storage) => {
         return this.storageService$.create(storage).pipe(
           map(response => {
-            this.router.navigate(['/storage']).then();
+            this.router.navigate(['/storages']).then();
             return StorageApiActions.createSuccess({ storage: response.data });
           }),
           catchError(err => {

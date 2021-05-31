@@ -31,7 +31,7 @@ export class DealEffects
         ofType(DealApiActions.init),
         exhaustMap(() => {
           return this.dealService$.init().pipe(
-            map(response => DealApiActions.initSuccess({ deals: <Deal[]>response.data.collection }))
+            map(response => DealApiActions.initSuccess({ deals: <Deal[]>response.data.data }))
           )
         })
       )
@@ -45,7 +45,7 @@ export class DealEffects
       exhaustMap((deal: Deal) => {
         return this.dealService$.create(deal).pipe(
           map(response => {
-            this.router.navigate(['/deal']).then();
+            this.router.navigate(['/deals']).then();
             return DealApiActions.createSuccess({ deal: response.data });
           }),
           catchError(err => {

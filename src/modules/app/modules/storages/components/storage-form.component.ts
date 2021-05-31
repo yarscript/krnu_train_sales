@@ -70,9 +70,8 @@ export class StorageFormComponent implements OnInit
   @Output() submitted = new EventEmitter<StorageStateInterface>();
 
   form: FormGroup = new FormGroup({
-    'deal_id': new FormControl(''),
-    'type_id': new FormControl(''),
-    'completion_date': new FormControl('')
+    'firm_id': new FormControl(''),
+    'total_slots': new FormControl(''),
   });
 
   constructor() {}

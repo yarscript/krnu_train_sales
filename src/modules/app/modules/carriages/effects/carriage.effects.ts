@@ -46,7 +46,7 @@ export class CarriageEffects
         return this.carriageService$.create(carriage).pipe(
           map(response => {
             this.router.navigate(['/carriage']).then();
-            return CarriageApiActions.createSuccess({ carriage: response.data });
+            return CarriageApiActions.createSuccess({ carriage: response.data.data });
           }),
           catchError(err => {
             return of(CarriageApiActions.createFailure(err));

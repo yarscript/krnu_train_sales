@@ -4,7 +4,7 @@ export interface Deal
   // type: number,
   deal_id: number,
   employee_id: string
-  type_id: string
+  type_id: number,
   amount: number,
   created_at: string,
   updated_at: string,
